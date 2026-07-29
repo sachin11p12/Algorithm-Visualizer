@@ -56,31 +56,38 @@ export const VisualizerCanvas: React.FC = () => {
       </div>
 
       {/* Main Array Bar Container */}
-      <div className="relative flex-1 w-full flex items-end justify-center gap-1 sm:gap-2 px-2 pt-8 pb-4 min-h-[220px] overflow-hidden">
+      <div className="relative flex-1 w-full flex items-end justify-center gap-1.5 sm:gap-2 px-2 pt-12 pb-10 min-h-[260px]">
         <AnimatePresence mode="popLayout">
           {array.map((value, idx) => {
             const status = getBarStatus(idx);
-            const heightPercent = Math.max((value / maxVal) * 100, 8);
+            // Calculate proportional height relative to max element value (min 10% height for 1, 100% for max)
+            const heightPercent = Math.max(Math.round((value / maxVal) * 100), 10);
             const inRange = isIndexInSearchRange(idx);
+            const isActiveAction = status === 'comparing' || status === 'swapping' || status === 'found';
 
-            let bgClass = 'bg-primary/70 border-primary/30';
+            let bgClass = 'bg-primary/70 border-primary/40';
             let textClass = 'text-primary-foreground';
             let shadowClass = '';
+            let scaleClass = '';
 
             if (status === 'found') {
-              bgClass = 'bg-gradient-to-t from-emerald-600 to-emerald-400 border-emerald-300';
-              shadowClass = 'shadow-[0_0_20px_rgba(16,185,129,0.6)] z-10 scale-105';
+              bgClass = 'bg-gradient-to-t from-emerald-600 via-emerald-500 to-emerald-400 border-emerald-300';
+              shadowClass = 'shadow-[0_0_25px_rgba(16,185,129,0.7)] z-20';
+              scaleClass = 'scale-110';
             } else if (status === 'swapping') {
-              bgClass = 'bg-gradient-to-t from-rose-600 to-pink-500 border-rose-300';
-              shadowClass = 'shadow-[0_0_20px_rgba(244,63,94,0.6)] z-10 scale-105';
+              bgClass = 'bg-gradient-to-t from-rose-600 via-pink-600 to-rose-400 border-rose-300';
+              shadowClass = 'shadow-[0_0_25px_rgba(244,63,94,0.7)] z-20';
+              scaleClass = 'scale-110 animate-pulse';
             } else if (status === 'comparing') {
-              bgClass = 'bg-gradient-to-t from-amber-500 to-yellow-400 border-amber-300';
-              shadowClass = 'shadow-[0_0_15px_rgba(245,158,11,0.5)] z-10';
+              bgClass = 'bg-gradient-to-t from-amber-500 via-amber-400 to-yellow-300 border-amber-200';
+              shadowClass = 'shadow-[0_0_20px_rgba(245,158,11,0.6)] z-20';
+              scaleClass = 'scale-110';
             } else if (status === 'selected') {
-              bgClass = 'bg-gradient-to-t from-purple-600 to-indigo-500 border-purple-300';
-              shadowClass = 'shadow-[0_0_15px_rgba(168,85,247,0.5)] z-10';
+              bgClass = 'bg-gradient-to-t from-purple-600 via-indigo-600 to-purple-400 border-purple-300';
+              shadowClass = 'shadow-[0_0_20px_rgba(168,85,247,0.6)] z-20';
+              scaleClass = 'scale-105';
             } else if (status === 'sorted') {
-              bgClass = 'bg-gradient-to-t from-emerald-500/80 to-teal-400/80 border-emerald-400/50';
+              bgClass = 'bg-gradient-to-t from-emerald-600/80 to-teal-400/80 border-emerald-400/50';
             }
 
             return (
@@ -90,35 +97,51 @@ export const VisualizerCanvas: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.25, ease: 'easeOut' }}
-                className={cn(
-                  'relative flex flex-col items-center justify-end rounded-t-lg transition-colors border group',
-                  bgClass,
-                  shadowClass,
-                  inRange && status === 'default' && 'ring-2 ring-sky-400/50 bg-sky-500/30'
-                )}
+                transition={{ duration: 0.2, ease: 'easeOut' }}
+                className="relative flex flex-col items-center justify-end h-full group"
                 style={{
-                  height: `${heightPercent}%`,
-                  width: `${Math.max(100 / array.length - 1, 1.5)}%`,
-                  minWidth: array.length > 30 ? '8px' : '16px',
-                  maxWidth: '48px',
+                  width: `${Math.max(100 / array.length - 1, 1.8)}%`,
+                  minWidth: array.length > 30 ? '10px' : '20px',
+                  maxWidth: '52px',
                 }}
               >
-                {/* Bar Value Label */}
-                <span
+                {/* Floating Value Label Above Bar */}
+                <div
                   className={cn(
-                    'text-[10px] sm:text-xs font-bold mb-1 transition-transform group-hover:scale-110',
-                    array.length > 35 ? 'hidden sm:block text-[8px]' : '',
-                    textClass
+                    'absolute -top-7 transition-all duration-200 font-extrabold whitespace-nowrap select-none z-30',
+                    isActiveAction ? 'text-xs sm:text-sm scale-125 font-black text-foreground drop-shadow-md' : 'text-[10px] sm:text-xs text-foreground/80'
                   )}
                 >
                   {value}
-                </span>
+                </div>
 
-                {/* Index label underneath bar */}
-                <span className="absolute -bottom-6 text-[9px] sm:text-[11px] font-medium text-muted-foreground">
-                  {idx}
-                </span>
+                {/* Animated Height Bar */}
+                <div
+                  className={cn(
+                    'w-full rounded-t-lg transition-all duration-200 border shadow-sm flex items-start justify-center pt-1',
+                    bgClass,
+                    shadowClass,
+                    scaleClass,
+                    inRange && status === 'default' && 'ring-2 ring-sky-400/60 bg-sky-500/40'
+                  )}
+                  style={{
+                    height: `${heightPercent}%`,
+                  }}
+                />
+
+                {/* Clear Array Index Badge Below Bar */}
+                <div className="absolute -bottom-8 flex items-center justify-center">
+                  <span
+                    className={cn(
+                      'px-1.5 py-0.5 rounded-md font-mono text-[9px] sm:text-[11px] font-bold border transition-colors shadow-sm select-none',
+                      isActiveAction
+                        ? 'bg-primary text-primary-foreground border-primary'
+                        : 'bg-secondary/90 text-muted-foreground border-border/60 hover:text-foreground'
+                    )}
+                  >
+                    {idx}
+                  </span>
+                </div>
               </motion.div>
             );
           })}
@@ -133,21 +156,22 @@ export const VisualizerCanvas: React.FC = () => {
         </div>
         <div className="flex items-center space-x-1.5">
           <span className="w-3 h-3 rounded-full bg-amber-400 border border-amber-300 shadow-[0_0_8px_rgba(245,158,11,0.5)]" />
-          <span className="text-muted-foreground">Comparing</span>
+          <span className="text-muted-foreground font-medium">Comparing</span>
         </div>
         <div className="flex items-center space-x-1.5">
           <span className="w-3 h-3 rounded-full bg-rose-500 border border-rose-300 shadow-[0_0_8px_rgba(244,63,94,0.5)]" />
-          <span className="text-muted-foreground">Swapping / Shift</span>
+          <span className="text-muted-foreground font-medium">Swapping / Shift</span>
         </div>
         <div className="flex items-center space-x-1.5">
           <span className="w-3 h-3 rounded-full bg-purple-500 border border-purple-300" />
-          <span className="text-muted-foreground">Selected / Pivot</span>
+          <span className="text-muted-foreground font-medium">Selected / Pivot</span>
         </div>
         <div className="flex items-center space-x-1.5">
           <span className="w-3 h-3 rounded-full bg-emerald-400 border border-emerald-300 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
-          <span className="text-muted-foreground">Sorted / Found</span>
+          <span className="text-muted-foreground font-medium">Sorted / Found</span>
         </div>
       </div>
     </div>
   );
 };
+
