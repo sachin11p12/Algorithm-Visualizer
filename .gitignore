@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+Frontend/node_modules/
+
+# next.js
+.next/
+Frontend/.next/
+
+# production
+build/
+Frontend/out/
+
+# misc
+.DS_Store
+*.pem
+*.log
+
+# env files
+.env*
