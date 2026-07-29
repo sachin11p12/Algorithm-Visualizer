@@ -11,6 +11,8 @@ import {
   Sliders,
   Zap,
   Edit3,
+  Plus,
+  Minus,
 } from 'lucide-react';
 import { useVisualizerStore, SpeedMultiplier } from '@/store/useVisualizerStore';
 import { cn } from '@/lib/utils';
@@ -170,7 +172,7 @@ export const ControlPanel: React.FC = () => {
 
       {/* Bottom Row: Sliders & Speed Selectors */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-border/40">
-        {/* Array Size Slider */}
+        {/* Array Size Slider & Manual +/- Controls */}
         <div className="space-y-2">
           <div className="flex items-center justify-between text-xs font-medium text-muted-foreground">
             <span className="flex items-center space-x-1.5">
@@ -179,15 +181,36 @@ export const ControlPanel: React.FC = () => {
             </span>
             <span className="font-bold text-foreground">{arraySize} elements</span>
           </div>
-          <input
-            type="range"
-            min={5}
-            max={50}
-            value={arraySize}
-            disabled={isPlaying}
-            onChange={(e) => setArraySize(Number(e.target.value))}
-            className="w-full accent-primary h-1.5 bg-secondary rounded-lg cursor-pointer disabled:opacity-50"
-          />
+
+          <div className="flex items-center space-x-2">
+            <button
+              onClick={() => setArraySize(Math.max(5, arraySize - 1))}
+              disabled={isPlaying || arraySize <= 5}
+              className="p-1.5 rounded-xl bg-secondary hover:bg-secondary/80 border border-border/50 text-foreground font-bold disabled:opacity-40 disabled:cursor-not-allowed transition-all focus:outline-none focus:ring-2 focus:ring-primary/50"
+              title="Decrease Array Size (-1)"
+            >
+              <Minus className="w-3.5 h-3.5" />
+            </button>
+
+            <input
+              type="range"
+              min={5}
+              max={50}
+              value={arraySize}
+              disabled={isPlaying}
+              onChange={(e) => setArraySize(Number(e.target.value))}
+              className="w-full accent-primary h-1.5 bg-secondary rounded-lg cursor-pointer disabled:opacity-50"
+            />
+
+            <button
+              onClick={() => setArraySize(Math.min(50, arraySize + 1))}
+              disabled={isPlaying || arraySize >= 50}
+              className="p-1.5 rounded-xl bg-secondary hover:bg-secondary/80 border border-border/50 text-foreground font-bold disabled:opacity-40 disabled:cursor-not-allowed transition-all focus:outline-none focus:ring-2 focus:ring-primary/50"
+              title="Increase Array Size (+1)"
+            >
+              <Plus className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
 
         {/* Animation Speed Selector */}
