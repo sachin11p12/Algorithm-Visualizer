@@ -9,6 +9,17 @@ export const StatsPanel: React.FC = () => {
   const currentStep = steps[currentStepIdx] || { comparisons: 0, swaps: 0 };
   const totalSteps = steps.length;
   const progressPercent = totalSteps > 1 ? Math.round((currentStepIdx / (totalSteps - 1)) * 100) : 0;
+  
+//  console.log(
+//   typeof window === "undefined" ? "SERVER" : "CLIENT",
+//   {
+//     currentStepIdx,
+//     totalSteps,
+//     progressPercent,
+//     elapsedTime,
+//     stepsLength: steps.length,
+//   }
+// );
 
   return (
     <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -53,7 +64,7 @@ export const StatsPanel: React.FC = () => {
         <div>
           <p className="text-[10px] font-semibold text-muted-foreground uppercase">Progress</p>
           <p className="text-base font-extrabold text-foreground">
-            {currentStepIdx + 1} / {totalSteps} ({progressPercent}%)
+            {currentStepIdx + 1} / {totalSteps} ({progressPercent}%)  
           </p>
         </div>
       </div>
