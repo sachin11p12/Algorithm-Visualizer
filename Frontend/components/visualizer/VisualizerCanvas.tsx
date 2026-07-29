@@ -56,17 +56,16 @@ export const VisualizerCanvas: React.FC = () => {
       </div>
 
       {/* Main Array Bar Container */}
-      <div className="relative flex-1 w-full flex items-end justify-center gap-1.5 sm:gap-2 px-2 pt-12 pb-10 min-h-[260px]">
+      <div className="relative w-full h-[280px] sm:h-[340px] flex items-end justify-center gap-1.5 sm:gap-2 px-2 pt-10 pb-10">
         <AnimatePresence mode="popLayout">
           {array.map((value, idx) => {
             const status = getBarStatus(idx);
-            // Calculate proportional height relative to max element value (min 10% height for 1, 100% for max)
-            const heightPercent = Math.max(Math.round((value / maxVal) * 100), 10);
+            // Calculate proportional height relative to max element value (5% for min, 100% for max)
+            const heightPercent = Math.max(Math.round((value / maxVal) * 100), 6);
             const inRange = isIndexInSearchRange(idx);
             const isActiveAction = status === 'comparing' || status === 'swapping' || status === 'found';
 
-            let bgClass = 'bg-primary/70 border-primary/40';
-            let textClass = 'text-primary-foreground';
+            let bgClass = 'bg-primary/75 border-primary/40';
             let shadowClass = '';
             let scaleClass = '';
 
@@ -94,12 +93,19 @@ export const VisualizerCanvas: React.FC = () => {
               <motion.div
                 key={`${idx}-${value}`}
                 layout
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scaleY: 0 }}
+                animate={{ opacity: 1, scaleY: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.2, ease: 'easeOut' }}
-                className="relative flex flex-col items-center justify-end h-full group"
+                className={cn(
+                  'relative flex items-start justify-center rounded-t-lg transition-all duration-200 border shadow-sm group select-none',
+                  bgClass,
+                  shadowClass,
+                  scaleClass,
+                  inRange && status === 'default' && 'ring-2 ring-sky-400/60 bg-sky-500/40'
+                )}
                 style={{
+                  height: `${heightPercent}%`,
                   width: `${Math.max(100 / array.length - 1, 1.8)}%`,
                   minWidth: array.length > 30 ? '10px' : '20px',
                   maxWidth: '52px',
@@ -108,34 +114,22 @@ export const VisualizerCanvas: React.FC = () => {
                 {/* Floating Value Label Above Bar */}
                 <div
                   className={cn(
-                    'absolute -top-7 transition-all duration-200 font-extrabold whitespace-nowrap select-none z-30',
-                    isActiveAction ? 'text-xs sm:text-sm scale-125 font-black text-foreground drop-shadow-md' : 'text-[10px] sm:text-xs text-foreground/80'
+                    'absolute -top-7 transition-all duration-200 font-extrabold whitespace-nowrap z-30 select-none pointer-events-none',
+                    isActiveAction
+                      ? 'text-xs sm:text-sm scale-125 font-black text-foreground drop-shadow-md'
+                      : 'text-[10px] sm:text-xs text-foreground/90 font-bold'
                   )}
                 >
                   {value}
                 </div>
 
-                {/* Animated Height Bar */}
-                <div
-                  className={cn(
-                    'w-full rounded-t-lg transition-all duration-200 border shadow-sm flex items-start justify-center pt-1',
-                    bgClass,
-                    shadowClass,
-                    scaleClass,
-                    inRange && status === 'default' && 'ring-2 ring-sky-400/60 bg-sky-500/40'
-                  )}
-                  style={{
-                    height: `${heightPercent}%`,
-                  }}
-                />
-
-                {/* Clear Array Index Badge Below Bar */}
-                <div className="absolute -bottom-8 flex items-center justify-center">
+                {/* Array Index Badge Below Bar */}
+                <div className="absolute -bottom-8 flex items-center justify-center pointer-events-none">
                   <span
                     className={cn(
                       'px-1.5 py-0.5 rounded-md font-mono text-[9px] sm:text-[11px] font-bold border transition-colors shadow-sm select-none',
                       isActiveAction
-                        ? 'bg-primary text-primary-foreground border-primary'
+                        ? 'bg-primary text-primary-foreground border-primary scale-110'
                         : 'bg-secondary/90 text-muted-foreground border-border/60 hover:text-foreground'
                     )}
                   >
