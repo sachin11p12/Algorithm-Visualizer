@@ -23,7 +23,7 @@ export const Footer: React.FC = () => {
               </span>
             </div>
 
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-[240px]">
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-[380px]">
               Interactive visualization tools for mastering sorting and searching algorithms.
             </p>
 
