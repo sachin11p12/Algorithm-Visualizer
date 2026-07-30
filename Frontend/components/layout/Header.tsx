@@ -2,76 +2,71 @@
 
 import React from 'react';
 import { useTheme } from 'next-themes';
-import { Sun, Moon, Sparkles, Menu, X, Cpu } from 'lucide-react';
+import { Sun, Moon, Home, Cpu } from 'lucide-react';
 import { useVisualizerStore } from '@/store/useVisualizerStore';
 import { ALGORITHM_DATA } from '@/lib/algorithmData';
+import { cn } from '@/lib/utils';
 
 interface HeaderProps {
-  onToggleSidebar?: () => void;
-  isSidebarOpen?: boolean;
+  view?: 'home' | 'visualizer';
+  onNavigateHome?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ onToggleSidebar, isSidebarOpen }) => {
+export const Header: React.FC<HeaderProps> = ({ view = 'home', onNavigateHome }) => {
   const { theme, setTheme } = useTheme();
   const { algorithm } = useVisualizerStore();
   const currentAlgo = ALGORITHM_DATA[algorithm];
 
   return (
-    <header className="sticky top-0 z-40 w-full glass-panel border-b border-border/40 px-4 lg:px-8 py-3 transition-colors duration-300">
-      <div className="flex items-center justify-between max-w-7xl mx-auto">
-        {/* Left Section: Mobile Menu & Logo */}
-        <div className="flex items-center space-x-3">
-          <button
-            onClick={onToggleSidebar}
-            className="p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/50 lg:hidden transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50"
-            aria-label="Toggle Sidebar"
-          >
-            {isSidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+    <header className="sticky top-0 z-40 w-full bg-[#0d0d10]/90 dark:bg-[#0d0d10]/90 backdrop-blur-md border-b border-white/8 px-6 lg:px-12 py-3.5 transition-colors duration-300">
+      <div className="flex items-center justify-between max-w-[1280px] mx-auto">
 
-          <div className="flex items-center space-x-2">
-            <div className="p-2 bg-primary/10 text-primary rounded-xl ring-1 ring-primary/20 shadow-inner">
-              <Cpu className="w-6 h-6 animate-pulse" />
-            </div>
-            <div>
-              <div className="flex items-center space-x-2">
-                <span className="font-extrabold text-xl tracking-tight bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                  AlgoVisualizer
-                </span>
-                <span className="text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20">
-                  Interactive
-                </span>
-              </div>
-              <p className="text-xs text-muted-foreground hidden sm:block">
-                Modern Algorithm Engine & Pseudocode Visualizer
-              </p>
-            </div>
+        {/* Left: Logo */}
+        <button
+          onClick={onNavigateHome}
+          className="flex items-center space-x-2.5 group"
+          aria-label="Go to home"
+        >
+          <div className="p-1.5 bg-blue-600/20 text-blue-400 rounded-lg ring-1 ring-blue-500/30">
+            <Cpu className="w-5 h-5" />
           </div>
-        </div>
+          <span className="font-black text-lg tracking-tight">
+            <span className="text-white">Algorithm</span>
+            <span className="text-blue-400"> Visualizer</span>
+          </span>
+        </button>
 
-        {/* Right Section: Active Algorithm Badge & Theme Toggle */}
+        {/* Right: Active badge (in visualizer) + Theme Toggle */}
         <div className="flex items-center space-x-3">
-          {currentAlgo && (
-            <div className="hidden md:flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-muted/60 border border-border/50 text-xs font-medium">
-              <Sparkles className="w-3.5 h-3.5 text-primary" />
-              <span className="text-muted-foreground">Active:</span>
-              <span className="font-semibold text-foreground">{currentAlgo.name}</span>
-              <span className="px-1.5 py-0.5 rounded bg-primary/15 text-primary text-[10px] font-bold uppercase">
-                {currentAlgo.category}
-              </span>
+          {/* Show active algorithm badge when in visualizer view */}
+          {view === 'visualizer' && currentAlgo && (
+            <div className="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-medium">
+              <span className="text-gray-400">Viewing:</span>
+              <span className="font-semibold text-white">{currentAlgo.name}</span>
             </div>
           )}
 
-          {/* Theme Toggle Button */}
+          {/* Home button when in visualizer */}
+          {view === 'visualizer' && (
+            <button
+              onClick={onNavigateHome}
+              className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-[13px] font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all"
+            >
+              <Home className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Home</span>
+            </button>
+          )}
+
+          {/* Theme Toggle */}
           <button
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="p-2.5 rounded-xl bg-secondary/80 hover:bg-secondary border border-border/40 text-foreground transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+            className="p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white transition-all duration-200"
             title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} mode`}
           >
             {theme === 'dark' ? (
-              <Sun className="w-4 h-4 text-amber-400 transition-transform duration-300 hover:rotate-45" />
+              <Sun className="w-4 h-4 text-amber-400" />
             ) : (
-              <Moon className="w-4 h-4 text-indigo-600 transition-transform duration-300 hover:-rotate-12" />
+              <Moon className="w-4 h-4 text-indigo-400" />
             )}
           </button>
         </div>
