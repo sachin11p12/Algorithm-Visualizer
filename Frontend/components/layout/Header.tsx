@@ -65,7 +65,7 @@ export const Header: React.FC<HeaderProps> = () => {
                   key={item.label}
                   href={item.href}
                   className={cn(
-                    'flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all shadow-sm',
+                    'flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-md font-bold transition-all shadow-sm',
                     isActive
                       ? 'bg-primary text-primary-foreground shadow-primary/25'
                       : 'bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20'
