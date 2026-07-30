@@ -18,10 +18,10 @@ export const Footer: React.FC = () => {
   const year = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: Twitter, href: '#', label: 'Twitter / X' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
+    { icon: Twitter, href: 'https://x.com/sachintiwa90480', label: 'Twitter / X' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/sachin-tiwari-18s21/', label: 'LinkedIn' },
     { icon: Github, href: 'https://github.com/sachin11p12', label: 'GitHub' },
-    { icon: Instagram, href: '#', label: 'Instagram' },
+    { icon: Instagram, href: 'https://www.instagram.com/sachin_tiwari_.12/', label: 'Instagram' },
   ];
 
   const navLinks = [
