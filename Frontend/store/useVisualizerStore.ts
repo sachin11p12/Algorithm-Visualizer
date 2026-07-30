@@ -66,11 +66,14 @@ function computeSteps(algorithm: AlgorithmKey, array: number[], target: number):
   }
 }
 
+// Deterministic default array to prevent Next.js SSR vs Client Hydration Mismatches
+const DEFAULT_INITIAL_ARRAY = [45, 20, 75, 30, 85, 50, 15, 60, 95, 40, 65, 25, 80, 10, 55];
+
 export const useVisualizerStore = create<VisualizerState>((set, get) => {
-  const initialSize = 15;
-  const initialArray = generateRandomArray(initialSize, 10, 100);
+  const initialSize = DEFAULT_INITIAL_ARRAY.length;
+  const initialArray = [...DEFAULT_INITIAL_ARRAY];
   const initialAlgorithm: AlgorithmKey = 'bubble-sort';
-  const initialTarget = initialArray[Math.floor(Math.random() * initialArray.length)] || 45;
+  const initialTarget = 45;
   const initialSteps = computeSteps(initialAlgorithm, initialArray, initialTarget);
 
   return {

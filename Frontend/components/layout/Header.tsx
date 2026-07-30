@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
@@ -25,6 +25,11 @@ export const Header: React.FC<HeaderProps> = () => {
   const { theme, setTheme } = useTheme();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const navItems = [
     { label: 'Portfolio', href: '/' },
@@ -120,11 +125,11 @@ export const Header: React.FC<HeaderProps> = () => {
 
           {/* Theme Toggle Button */}
           <button
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            onClick={() => mounted && setTheme(theme === 'dark' ? 'light' : 'dark')}
             className="p-2.5 rounded-xl bg-secondary hover:bg-secondary/80 border border-border/40 text-foreground transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
-            title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} mode`}
+            title="Toggle theme"
           >
-            {theme === 'dark' ? (
+            {mounted && theme === 'dark' ? (
               <Sun className="w-4 h-4 text-amber-400 transition-transform duration-300 hover:rotate-45" />
             ) : (
               <Moon className="w-4 h-4 text-indigo-600 transition-transform duration-300 hover:-rotate-12" />
@@ -135,10 +140,10 @@ export const Header: React.FC<HeaderProps> = () => {
         {/* Mobile Hamburger Toggle */}
         <div className="flex items-center space-x-2 md:hidden">
           <button
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            onClick={() => mounted && setTheme(theme === 'dark' ? 'light' : 'dark')}
             className="p-2 rounded-xl bg-secondary border border-border/50 text-foreground"
           >
-            {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-600" />}
+            {mounted && theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-600" />}
           </button>
 
           <button
