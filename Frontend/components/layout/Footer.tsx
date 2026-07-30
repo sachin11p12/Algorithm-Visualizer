@@ -136,9 +136,9 @@ export const Footer: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="w-11 h-11 flex items-center justify-center rounded-full bg-secondary/60 border border-border/50 text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-200"
+                    className="p-2 text-foreground dark:text-white hover:text-primary transition-colors duration-200 group"
                   >
-                    <Icon className="w-[18px] h-[18px]" />
+                    <Icon className="w-5 h-5 text-foreground dark:text-white group-hover:text-primary transition-colors duration-200" />
                   </a>
                 ))}
               </div>
