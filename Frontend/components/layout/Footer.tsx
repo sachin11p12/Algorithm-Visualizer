@@ -92,7 +92,9 @@ export const Footer: React.FC = () => {
                     href={item.href}
                     className="flex items-center gap-3 text-[15px] text-muted-foreground hover:text-foreground transition-colors duration-150 group"
                   >
-                    {item.icon && <item.icon className="w-[18px] h-[18px] flex-shrink-0 text-primary" />}
+                    {item.icon && (
+                      <item.icon className="w-[18px] h-[18px] flex-shrink-0 text-foreground dark:text-white group-hover:text-primary transition-colors duration-150" />
+                    )}
                     <span>{item.label}</span>
                   </a>
                 </li>
