@@ -36,7 +36,7 @@ export const Header: React.FC<HeaderProps> = () => {
     { label: 'Projects', href: '#projects' },
     { label: 'Skills', href: '#skills' },
     { label: 'Experience', href: '#experience' },
-    { label: 'Algo Visualizer', href: '/sorting/bubble-sort', isFeatured: true },
+    { label: 'Algo Visualizer', href: '/algo', isFeatured: true },
     { label: 'Contact', href: 'mailto:Sachin11p12@gmail.com' },
   ];
 
@@ -48,9 +48,8 @@ export const Header: React.FC<HeaderProps> = () => {
           <div className="p-1.5 bg-primary/10 text-primary rounded-xl ring-1 ring-primary/20 shadow-sm group-hover:scale-105 transition-transform">
             <Cpu className="w-5 h-5" />
           </div>
-          <span className="font-extrabold text-lg tracking-tight">
-            <span className="text-foreground">Algo</span>
-            <span className="text-primary"> Visualizer</span>
+          <span className="font-bold text-lg tracking-tight">
+            <span className="text-foreground">SACHIN</span>
           </span>
         </Link>
 
@@ -60,9 +59,7 @@ export const Header: React.FC<HeaderProps> = () => {
             const isActive =
               item.href === '/'
                 ? pathname === '/'
-                : item.href.startsWith('/sorting') || item.href.startsWith('/searching')
-                ? pathname !== '/'
-                : pathname === item.href;
+                : pathname.startsWith('/algo') || pathname.startsWith('/sorting') || pathname.startsWith('/searching');
 
             if (item.isFeatured) {
               return (

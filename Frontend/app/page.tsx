@@ -2,135 +2,84 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles, Code2, Cpu, Rocket } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import { ALGORITHM_DATA } from '@/lib/algorithmData';
-import { AlgorithmKey } from '@/lib/types';
-import { cn } from '@/lib/utils';
 
-type Difficulty = 'Easy' | 'Medium' | 'Hard';
-
-const ALGORITHM_CATEGORIES: {
-  title: string;
-  category: 'sorting' | 'searching';
-  algorithms: { key: AlgorithmKey; difficulty: Difficulty }[];
-}[] = [
-  {
-    title: 'Sorting Algorithms',
-    category: 'sorting',
-    algorithms: [
-      { key: 'bubble-sort', difficulty: 'Easy' },
-      { key: 'selection-sort', difficulty: 'Easy' },
-      { key: 'insertion-sort', difficulty: 'Easy' },
-      { key: 'merge-sort', difficulty: 'Medium' },
-      { key: 'quick-sort', difficulty: 'Medium' },
-      { key: 'heap-sort', difficulty: 'Hard' },
-    ],
-  },
-  {
-    title: 'Searching Algorithms',
-    category: 'searching',
-    algorithms: [
-      { key: 'linear-search', difficulty: 'Easy' },
-      { key: 'binary-search', difficulty: 'Medium' },
-    ],
-  },
-];
-
-const difficultyStyle: Record<Difficulty, string> = {
-  Easy: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30',
-  Medium: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30',
-  Hard: 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/30',
-};
-
-function AlgorithmCard({
-  algorithmKey,
-  difficulty,
-  category,
-}: {
-  algorithmKey: AlgorithmKey;
-  difficulty: Difficulty;
-  category: 'sorting' | 'searching';
-}) {
-  const info = ALGORITHM_DATA[algorithmKey];
-  const href = `/${category}/${algorithmKey}`;
-
-  return (
-    <div className="group flex flex-col justify-between glass-card bg-card/60 border border-border/50 rounded-2xl p-5 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
-      {/* Card Header */}
-      <div className="space-y-3">
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="text-base font-bold text-foreground leading-snug group-hover:text-primary transition-colors">
-            {info.name}
-          </h3>
-          <span className={cn('text-[11px] font-semibold px-2 py-0.5 rounded-full whitespace-nowrap flex-shrink-0', difficultyStyle[difficulty])}>
-            {difficulty}
-          </span>
-        </div>
-        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
-          {info.description}
-        </p>
-      </div>
-
-      {/* Card Footer */}
-      <div className="flex items-center justify-between mt-5 pt-4 border-t border-border/40">
-        <span className="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-secondary text-secondary-foreground border border-border/40 capitalize">
-          {info.category}
-        </span>
-        <Link
-          href={href}
-          className="flex items-center space-x-1.5 text-xs font-semibold text-primary hover:text-primary-foreground hover:bg-primary px-3.5 py-1.5 rounded-lg transition-all duration-200 shadow-sm"
-        >
-          <span>Visualize</span>
-          <ArrowRight className="w-3.5 h-3.5" />
-        </Link>
-      </div>
-    </div>
-  );
-}
-
-export default function HomePage() {
+export default function PortfolioHomePage() {
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300">
       <Header view="home" />
 
-      <div className="flex-1 px-6 lg:px-12 py-10 max-w-[1280px] mx-auto w-full space-y-12">
-        {/* Hero */}
-        <div className="space-y-2 pt-2">
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight">
-            Algorithm Visualizer
+      {/* Main Hero Section */}
+      <main className="flex-1 flex flex-col justify-center max-w-[1280px] mx-auto px-6 lg:px-12 py-16 w-full space-y-12">
+        {/* Intro Tag & Title */}
+        <div className="space-y-6 max-w-3xl">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20 text-xs font-semibold">
+            <Sparkles className="w-4 h-4" />
+            <span>Full-Stack Developer & Algorithm Enthusiast</span>
+          </div>
+
+          <h1 className="text-4xl sm:text-6xl font-black text-foreground tracking-tight leading-tight">
+            Building High-Performance Web Apps & Visual Systems.
           </h1>
-          <p className="text-sm sm:text-base text-muted-foreground font-medium max-w-2xl leading-relaxed">
-            Master Algorithms Faster with Step-by-Step Visual Execution and Real-Time Insights.
+
+          <p className="text-base sm:text-lg text-muted-foreground font-medium leading-relaxed">
+            Hi, I&apos;m <span className="text-primary font-bold">Sachin Tiwari</span>. I specialize in React, Next.js, TypeScript, and interactive algorithmic visualizers. Explore my interactive algorithm studio below!
           </p>
+
+          <div className="flex flex-wrap items-center gap-4 pt-2">
+            <Link
+              href="/algo"
+              className="px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm shadow-lg shadow-primary/25 hover:bg-primary/90 transition-all flex items-center space-x-2 scale-100 active:scale-95"
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>Explore Algo Visualizer</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+
+            <a
+              href="mailto:Sachin11p12@gmail.com"
+              className="px-6 py-3 rounded-xl bg-secondary hover:bg-secondary/80 border border-border/50 text-foreground font-semibold text-sm transition-all"
+            >
+              Get In Touch
+            </a>
+          </div>
         </div>
 
-        {/* Algorithm Category Sections */}
-        {ALGORITHM_CATEGORIES.map((section) => (
-          <section key={section.title} className="space-y-5">
-            {/* Section Header */}
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl font-bold text-foreground tracking-tight">{section.title}</h2>
-              <span className="text-xs font-semibold px-3 py-1 bg-primary/10 text-primary border border-primary/20 rounded-lg">
-                {section.algorithms.length} Algorithms
-              </span>
+        {/* Feature Highlights Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8 border-t border-border/40">
+          <div className="p-6 rounded-2xl glass-card bg-card/60 border border-border/50 space-y-3">
+            <div className="p-2.5 w-fit rounded-xl bg-primary/10 text-primary border border-primary/20">
+              <Cpu className="w-5 h-5" />
             </div>
+            <h3 className="text-base font-bold text-foreground">Interactive Visualizer</h3>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Step-by-step 60 FPS animated playback of sorting and searching algorithms with custom inputs.
+            </p>
+          </div>
 
-            {/* Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {section.algorithms.map(({ key, difficulty }) => (
-                <AlgorithmCard
-                  key={key}
-                  algorithmKey={key}
-                  difficulty={difficulty}
-                  category={section.category}
-                />
-              ))}
+          <div className="p-6 rounded-2xl glass-card bg-card/60 border border-border/50 space-y-3">
+            <div className="p-2.5 w-fit rounded-xl bg-indigo-500/10 text-indigo-500 border border-indigo-500/20">
+              <Code2 className="w-5 h-5" />
             </div>
-          </section>
-        ))}
-      </div>
+            <h3 className="text-base font-bold text-foreground">Pseudocode Engine</h3>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Line-by-line syntax-highlighted code execution sync with real-time comparison counters.
+            </p>
+          </div>
+
+          <div className="p-6 rounded-2xl glass-card bg-card/60 border border-border/50 space-y-3">
+            <div className="p-2.5 w-fit rounded-xl bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
+              <Rocket className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-foreground">Modern Architecture</h3>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Built using Next.js 15 App Router, React 19, TypeScript, Zustand, and Framer Motion.
+            </p>
+          </div>
+        </div>
+      </main>
 
       <Footer />
     </div>

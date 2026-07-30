@@ -26,7 +26,7 @@ export const Footer: React.FC = () => {
 
   const navLinks = [
     { label: 'Home', href: '/', icon: Home },
-    { label: 'Algo Visualizer', href: '/sorting/bubble-sort', icon: Sparkles },
+    { label: 'Algo Visualizer', href: '/algo', icon: Sparkles },
     { label: 'About', href: '#', icon: Info },
     { label: 'FAQs', href: '#', icon: HelpCircle },
   ];

@@ -59,7 +59,7 @@ export default function VisualizerPageContent({ category }: VisualizerPageConten
         <div className="max-w-[1280px] mx-auto flex items-center space-x-1.5 text-xs text-muted-foreground">
           <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
           <ChevronRight className="w-3.5 h-3.5" />
-          <Link href="/" className="hover:text-foreground transition-colors capitalize">{categoryLabel}</Link>
+          <Link href="/algo" className="hover:text-foreground transition-colors">Algo Visualizer</Link>
           <ChevronRight className="w-3.5 h-3.5" />
           <span className="text-foreground font-semibold">{algoInfo.name}</span>
         </div>
