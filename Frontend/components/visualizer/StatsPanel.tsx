@@ -10,17 +10,6 @@ export const StatsPanel: React.FC = () => {
   const totalSteps = steps.length;
   const progressPercent = totalSteps > 1 ? Math.round((currentStepIdx / (totalSteps - 1)) * 100) : 0;
   
-//  console.log(
-//   typeof window === "undefined" ? "SERVER" : "CLIENT",
-//   {
-//     currentStepIdx,
-//     totalSteps,
-//     progressPercent,
-//     elapsedTime,
-//     stepsLength: steps.length,
-//   }
-// );
-
   return (
     <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-3">
       {/* Metric 1: Comparisons */}
