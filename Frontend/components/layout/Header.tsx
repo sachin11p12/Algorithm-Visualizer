@@ -1,32 +1,33 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { Sun, Moon, Home, Cpu } from 'lucide-react';
 import { useVisualizerStore } from '@/store/useVisualizerStore';
 import { ALGORITHM_DATA } from '@/lib/algorithmData';
-import { cn } from '@/lib/utils';
 
 interface HeaderProps {
   view?: 'home' | 'visualizer';
+  // Legacy prop kept for compatibility, not used anymore
   onNavigateHome?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ view = 'home', onNavigateHome }) => {
+export const Header: React.FC<HeaderProps> = ({ view = 'home' }) => {
   const { theme, setTheme } = useTheme();
+  const pathname = usePathname();
   const { algorithm } = useVisualizerStore();
   const currentAlgo = ALGORITHM_DATA[algorithm];
 
+  const isVisualizer = pathname !== '/';
+
   return (
-    <header className="sticky top-0 z-40 w-full bg-[#0d0d10]/90 dark:bg-[#0d0d10]/90 backdrop-blur-md border-b border-white/8 px-6 lg:px-12 py-3.5 transition-colors duration-300">
+    <header className="sticky top-0 z-40 w-full bg-[#0d0d10]/95 backdrop-blur-md border-b border-white/8 px-6 lg:px-12 py-3.5">
       <div className="flex items-center justify-between max-w-[1280px] mx-auto">
 
         {/* Left: Logo */}
-        <button
-          onClick={onNavigateHome}
-          className="flex items-center space-x-2.5 group"
-          aria-label="Go to home"
-        >
+        <Link href="/" className="flex items-center space-x-2.5 group">
           <div className="p-1.5 bg-blue-600/20 text-blue-400 rounded-lg ring-1 ring-blue-500/30">
             <Cpu className="w-5 h-5" />
           </div>
@@ -34,27 +35,27 @@ export const Header: React.FC<HeaderProps> = ({ view = 'home', onNavigateHome })
             <span className="text-white">Algorithm</span>
             <span className="text-blue-400"> Visualizer</span>
           </span>
-        </button>
+        </Link>
 
-        {/* Right: Active badge (in visualizer) + Theme Toggle */}
+        {/* Right */}
         <div className="flex items-center space-x-3">
-          {/* Show active algorithm badge when in visualizer view */}
-          {view === 'visualizer' && currentAlgo && (
-            <div className="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-medium">
+          {/* Active algorithm badge (when in visualizer) */}
+          {isVisualizer && currentAlgo && (
+            <div className="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-[13px]">
               <span className="text-gray-400">Viewing:</span>
               <span className="font-semibold text-white">{currentAlgo.name}</span>
             </div>
           )}
 
           {/* Home button when in visualizer */}
-          {view === 'visualizer' && (
-            <button
-              onClick={onNavigateHome}
+          {isVisualizer && (
+            <Link
+              href="/"
               className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-[13px] font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all"
             >
               <Home className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Home</span>
-            </button>
+            </Link>
           )}
 
           {/* Theme Toggle */}
