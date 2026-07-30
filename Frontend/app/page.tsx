@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Header } from '@/components/layout/Header';
 import { Sidebar } from '@/components/layout/Sidebar';
+import { Footer } from '@/components/layout/Footer';
 import { VisualizerCanvas } from '@/components/visualizer/VisualizerCanvas';
 import { ControlPanel } from '@/components/visualizer/ControlPanel';
 import { PseudocodePanel } from '@/components/visualizer/PseudocodePanel';
@@ -44,8 +45,12 @@ export default function Home() {
         </main>
       </div>
 
+      {/* Footer */}
+      <Footer />
+
       {/* Custom Input Modal */}
       <CustomArrayModal />
     </div>
   );
 }
+
