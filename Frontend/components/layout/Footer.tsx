@@ -54,7 +54,6 @@ export const Footer: React.FC = () => {
             <ul className="space-y-3">
               {[
                 { label: 'Home', href: '#' },
-                { label: 'Features', href: '#' },
                 { label: 'Visualizer', href: '#' },
                 { label: 'About', href: '#' },
                 { label: 'FAQs', href: '#' },
