@@ -15,7 +15,7 @@ export const Footer: React.FC = () => {
 
   const navLinks = [
     { label: 'Home', href: '/' },
-    { label: 'Visualizer', href: '/sorting/bubble-sort' },
+    { label: 'Algo Visualizer', href: '/sorting/bubble-sort' },
     { label: 'About', href: '#' },
     { label: 'FAQs', href: '#' },
   ];
@@ -43,7 +43,7 @@ export const Footer: React.FC = () => {
         </div>
  
         {/* Tagline */}
-        <p className="text-sm text-muted-foreground leading-relaxed max-w-[280px]">
+        <p className="text-md text-muted-foreground leading-relaxed max-w-[380px]">
           Master Algorithms Faster with Step-by-Step Visual Execution and Real-Time Insights.
         </p>
  
@@ -52,7 +52,7 @@ export const Footer: React.FC = () => {
           <div className="flex items-center space-x-2.5 text-sm text-muted-foreground">
             <Heart className="w-4 h-4 text-rose-500 fill-rose-500 flex-shrink-0" />
             <span>
-              Made with ♥ by{' '}
+              Made with <span className='text-sm'>♥</span> by{' '}
               <span className="font-semibold text-primary">Sachin Tiwari</span>
             </span>
           </div>
