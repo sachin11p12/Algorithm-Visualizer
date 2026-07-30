@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
@@ -23,11 +23,10 @@ interface VisualizerPageContentProps {
 
 export default function VisualizerPageContent({ category }: VisualizerPageContentProps) {
   const params = useParams();
-  const router = useRouter();
   const algorithmSlug = params.algorithm as string;
   const algorithmKey = algorithmSlug as AlgorithmKey;
 
-  const { setAlgorithm, algorithm } = useVisualizerStore();
+  const { setAlgorithm } = useVisualizerStore();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Validate the algorithm belongs to this category
@@ -42,9 +41,9 @@ export default function VisualizerPageContent({ category }: VisualizerPageConten
 
   if (!isValid) {
     return (
-      <div className="min-h-screen flex flex-col bg-[#0d0d10] items-center justify-center text-white">
+      <div className="min-h-screen flex flex-col bg-background text-foreground items-center justify-center">
         <p className="text-xl font-bold mb-2">Algorithm not found</p>
-        <Link href="/" className="text-blue-400 hover:underline text-sm">← Back to Home</Link>
+        <Link href="/" className="text-primary hover:underline text-sm">← Back to Home</Link>
       </div>
     );
   }
@@ -52,17 +51,17 @@ export default function VisualizerPageContent({ category }: VisualizerPageConten
   const categoryLabel = category.charAt(0).toUpperCase() + category.slice(1);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0d0d10]">
+    <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300">
       <Header view="visualizer" />
 
       {/* Breadcrumb */}
-      <div className="px-6 lg:px-12 py-2.5 border-b border-white/8">
-        <div className="max-w-[1280px] mx-auto flex items-center space-x-1.5 text-[13px] text-gray-500">
-          <Link href="/" className="hover:text-white transition-colors">Home</Link>
+      <div className="px-6 lg:px-12 py-2.5 border-b border-border/40 bg-card/30">
+        <div className="max-w-[1280px] mx-auto flex items-center space-x-1.5 text-xs text-muted-foreground">
+          <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
           <ChevronRight className="w-3.5 h-3.5" />
-          <Link href="/" className="hover:text-white transition-colors capitalize">{categoryLabel}</Link>
+          <Link href="/" className="hover:text-foreground transition-colors capitalize">{categoryLabel}</Link>
           <ChevronRight className="w-3.5 h-3.5" />
-          <span className="text-gray-300 font-medium">{algoInfo.name}</span>
+          <span className="text-foreground font-semibold">{algoInfo.name}</span>
         </div>
       </div>
 

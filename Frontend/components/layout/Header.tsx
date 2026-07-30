@@ -10,7 +10,6 @@ import { ALGORITHM_DATA } from '@/lib/algorithmData';
 
 interface HeaderProps {
   view?: 'home' | 'visualizer';
-  // Legacy prop kept for compatibility, not used anymore
   onNavigateHome?: () => void;
 }
 
@@ -23,17 +22,17 @@ export const Header: React.FC<HeaderProps> = ({ view = 'home' }) => {
   const isVisualizer = pathname !== '/';
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-[#0d0d10]/95 backdrop-blur-md border-b border-white/8 px-6 lg:px-12 py-3.5">
+    <header className="sticky top-0 z-40 w-full glass-panel border-b border-border/40 px-6 lg:px-12 py-3.5 transition-colors duration-300">
       <div className="flex items-center justify-between max-w-[1280px] mx-auto">
 
         {/* Left: Logo */}
         <Link href="/" className="flex items-center space-x-2.5 group">
-          <div className="p-1.5 bg-blue-600/20 text-blue-400 rounded-lg ring-1 ring-blue-500/30">
+          <div className="p-1.5 bg-primary/10 text-primary rounded-lg ring-1 ring-primary/20 shadow-sm">
             <Cpu className="w-5 h-5" />
           </div>
-          <span className="font-black text-lg tracking-tight">
-            <span className="text-white">Algorithm</span>
-            <span className="text-blue-400"> Visualizer</span>
+          <span className="font-extrabold text-lg tracking-tight">
+            <span className="text-foreground">Algorithm</span>
+            <span className="text-primary"> Visualizer</span>
           </span>
         </Link>
 
@@ -41,9 +40,9 @@ export const Header: React.FC<HeaderProps> = ({ view = 'home' }) => {
         <div className="flex items-center space-x-3">
           {/* Active algorithm badge (when in visualizer) */}
           {isVisualizer && currentAlgo && (
-            <div className="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-[13px]">
-              <span className="text-gray-400">Viewing:</span>
-              <span className="font-semibold text-white">{currentAlgo.name}</span>
+            <div className="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-secondary/80 border border-border/50 text-xs font-medium">
+              <span className="text-muted-foreground">Viewing:</span>
+              <span className="font-semibold text-foreground">{currentAlgo.name}</span>
             </div>
           )}
 
@@ -51,7 +50,7 @@ export const Header: React.FC<HeaderProps> = ({ view = 'home' }) => {
           {isVisualizer && (
             <Link
               href="/"
-              className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-[13px] font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all"
+              className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-secondary/80 hover:bg-secondary border border-border/40 text-xs font-semibold text-foreground transition-all shadow-sm"
             >
               <Home className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Home</span>
@@ -61,13 +60,13 @@ export const Header: React.FC<HeaderProps> = ({ view = 'home' }) => {
           {/* Theme Toggle */}
           <button
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white transition-all duration-200"
+            className="p-2.5 rounded-xl bg-secondary/80 hover:bg-secondary border border-border/40 text-foreground transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
             title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} mode`}
           >
             {theme === 'dark' ? (
-              <Sun className="w-4 h-4 text-amber-400" />
+              <Sun className="w-4 h-4 text-amber-400 transition-transform duration-300 hover:rotate-45" />
             ) : (
-              <Moon className="w-4 h-4 text-indigo-400" />
+              <Moon className="w-4 h-4 text-indigo-600 transition-transform duration-300 hover:-rotate-12" />
             )}
           </button>
         </div>
