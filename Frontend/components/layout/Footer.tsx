@@ -155,7 +155,6 @@ export const Footer: React.FC = () => {
             © {year} AlgoVisualizer. All rights reserved.
           </span>
           <div className="flex items-center space-x-6 text-xs text-muted-foreground">
-            <a href="#" className="hover:text-foreground transition-colors">Sitemap</a>
             <a href="mailto:Sachin11p12@gmail.com" className="hover:text-foreground transition-colors">Contact</a>
           </div>
         </div>
