@@ -74,7 +74,7 @@ export const Footer: React.FC = () => {
 
           {/* ── Column 2: Navigation ── */}
           <div className="space-y-5">
-            <h4 className="text-xs font-bold uppercase tracking-[0.15em] text-foreground">
+            <h4 className="text-md font-bold uppercase tracking-wider text-foreground">
               Navigation
             </h4>
             <ul className="space-y-3.5">
@@ -96,7 +96,7 @@ export const Footer: React.FC = () => {
           <div className="space-y-10">
             {/* Legal */}
             <div className="space-y-5">
-              <h4 className="text-xs font-bold uppercase tracking-[0.15em] text-foreground">
+              <h4 className="text-md font-bold uppercase tracking-wider text-foreground">
                 Legal
               </h4>
               <ul className="space-y-3.5">
@@ -115,7 +115,7 @@ export const Footer: React.FC = () => {
 
             {/* Connect */}
             <div className="space-y-4">
-              <h4 className="text-xs font-bold uppercase tracking-[0.15em] text-foreground">
+              <h4 className="text-md font-bold uppercase tracking-wider text-foreground">
                 Connect
               </h4>
               <div className="flex items-center space-x-2.5">
