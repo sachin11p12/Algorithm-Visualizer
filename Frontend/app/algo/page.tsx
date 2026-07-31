@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, ChevronRight, Info } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
@@ -88,6 +88,8 @@ function ExactAlgorithmCard({
 }
 
 export default function AlgoPage() {
+  const [showInfoPopover, setShowInfoPopover] = useState(false);
+
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300">
       <Header view="home" />
@@ -104,17 +106,62 @@ export default function AlgoPage() {
         </div>
 
         {/* ── Array Data Structure Container ── */}
-        <div className="w-full glass-card bg-card/80 border border-border/60 rounded-2xl shadow-sm overflow-hidden space-y-0">
+        <div className="w-full glass-card bg-card/80 border border-border/60 rounded-2xl shadow-sm space-y-0">
           {/* Main Array Header Bar */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-border/40 bg-muted/20">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-border/40 bg-muted/20 relative">
             <div className="flex items-center space-x-3">
               <div className="p-1.5 rounded-lg bg-primary/15 text-primary">
                 <ChevronRight className="w-4 h-4" />
               </div>
               <h2 className="text-lg font-bold text-foreground tracking-tight">Array</h2>
             </div>
-            <div className="text-muted-foreground hover:text-foreground cursor-pointer transition-colors" title="Array Data Structure Algorithms">
-              <Info className="w-4.5 h-4.5" />
+
+            {/* Info Button & Popover */}
+            <div className="relative">
+              <button
+                onMouseEnter={() => setShowInfoPopover(true)}
+                onMouseLeave={() => setShowInfoPopover(false)}
+                onClick={() => setShowInfoPopover((prev) => !prev)}
+                className="p-1.5 rounded-full hover:bg-secondary text-muted-foreground hover:text-primary transition-colors focus:outline-none"
+                aria-label="Array Info"
+              >
+                <Info className="w-5 h-5" />
+              </button>
+
+              {/* Hover Popover */}
+              {showInfoPopover && (
+                <div
+                  onMouseEnter={() => setShowInfoPopover(true)}
+                  onMouseLeave={() => setShowInfoPopover(false)}
+                  className="absolute right-0 top-10 z-50 w-80 sm:w-96 p-5 glass-card bg-card/95 backdrop-blur-xl border border-border/80 rounded-2xl shadow-2xl text-left space-y-4 animate-in fade-in zoom-in-95 duration-150"
+                >
+                  <div className="space-y-1.5">
+                    <p className="text-xs sm:text-sm text-foreground leading-relaxed">
+                      <strong className="font-bold text-foreground">About:</strong> An array is a data structure that stores multiple values of the same type in a single variable. Each value is stored at a specific index, starting from 0.
+                    </p>
+                  </div>
+
+                  {/* Representation */}
+                  <div className="space-y-2.5 pt-2 border-t border-border/40">
+                    <h4 className="text-xs font-bold text-foreground">Representation:</h4>
+                    <div className="flex items-center justify-start gap-2.5 pt-1">
+                      {[
+                        { val: 10, idx: '[0]' },
+                        { val: 20, idx: '[1]' },
+                        { val: 30, idx: '[2]' },
+                        { val: 40, idx: '[3]' },
+                      ].map(({ val, idx }) => (
+                        <div key={idx} className="flex flex-col items-center gap-1.5">
+                          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-blue-600 dark:bg-blue-500 text-white font-black text-xs sm:text-sm flex items-center justify-center shadow-lg shadow-blue-500/25">
+                            {val}
+                          </div>
+                          <span className="font-mono text-[11px] text-muted-foreground font-semibold">{idx}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
