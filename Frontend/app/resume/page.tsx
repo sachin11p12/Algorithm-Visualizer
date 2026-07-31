@@ -165,6 +165,14 @@ export default function ResumePage() {
             <div className="flex justify-between items-baseline">
               <div>
                 <span className="font-bold text-slate-900">BTech in Information Technology</span> (Grade: A)
+                <a
+                  href="/Sachin_PDC.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-2 text-blue-700 hover:underline font-semibold text-[11px]"
+                >
+                  [View PDC]
+                </a>
                 <div className="text-slate-700">Goel Institute of Technology and Management</div>
               </div>
               <div className="text-[11px] font-semibold text-slate-700">2022 – 2025 | Lucknow, UP</div>

@@ -426,6 +426,17 @@ export default function PortfolioHomePage() {
                 </div>
                 <p className="text-xs font-semibold text-muted-foreground">Goel Institute of Technology and Management</p>
                 <p className="text-xs text-muted-foreground">2022 – 2025 | Lucknow, Uttar Pradesh</p>
+                <div className="pt-2">
+                  <a
+                    href="/Sachin_PDC.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center space-x-1.5 text-xs font-semibold text-primary hover:underline"
+                  >
+                    <span>View Degree / PDC</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
               </div>
 
               <div className="p-5 rounded-2xl glass-card bg-card/60 border border-border/50 space-y-2">
