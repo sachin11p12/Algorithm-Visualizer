@@ -499,6 +499,17 @@ export default function PortfolioHomePage() {
             <p className="text-xs text-muted-foreground leading-relaxed">
               Published a research review paper focusing on digital banking architecture, security principles, user authentication, role-based access control (RBAC), transaction management workflows, and scalable system design principles.
             </p>
+            <div className="pt-2">
+              <a
+                href="https://www.ijraset.com/print-certificate/review-paper-on-nextgen-banking-a-secure-and-scalable-banking-system"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-1.5 text-xs font-semibold text-primary hover:underline"
+              >
+                <span>View Certificate / Publication</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
           </div>
         </section>
 

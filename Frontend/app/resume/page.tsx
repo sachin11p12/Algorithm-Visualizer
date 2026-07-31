@@ -201,7 +201,7 @@ export default function ResumePage() {
           <h2 className="text-xs font-bold uppercase tracking-widest text-slate-900 border-b border-slate-300 pb-1">
             Research Publications
           </h2>
-          <div className="text-xs text-slate-800">
+          <div className="text-xs text-slate-800 space-y-1">
             <div className="flex justify-between font-bold text-slate-900">
               <span>Secure and Scalable Banking Systems Architecture</span>
               <span className="text-[11px] text-slate-700 font-semibold">05/2025</span>
@@ -210,6 +210,16 @@ export default function ResumePage() {
             <p className="mt-1 text-slate-800">
               Published research review paper on digital banking architecture, security principles, user authentication, role-based access control (RBAC), and transaction management principles.
             </p>
+            <div className="pt-1">
+              <a
+                href="https://www.ijraset.com/print-certificate/review-paper-on-nextgen-banking-a-secure-and-scalable-banking-system"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-700 hover:underline font-semibold text-[11px] inline-flex items-center gap-1"
+              >
+                <span>View Certificate: ijraset.com/print-certificate/review-paper-on-nextgen-banking</span>
+              </a>
+            </div>
           </div>
         </div>
 
