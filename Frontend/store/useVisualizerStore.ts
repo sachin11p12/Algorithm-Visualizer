@@ -157,6 +157,7 @@ export const useVisualizerStore = create<VisualizerState>((set, get) => {
         isCustomModalOpen: false,
       });
       return true;
+      
     },
 
     regenerateArray: () => {
