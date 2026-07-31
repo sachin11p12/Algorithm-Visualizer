@@ -51,10 +51,10 @@ function ExactAlgorithmCard({
   return (
     <Link
       href={href}
-      className="group flex flex-col justify-between glass-card bg-card/60 border border-border/50 rounded-2xl p-5 hover:border-primary/60 hover:shadow-xl transition-all duration-300"
+      className="group flex flex-col justify-between glass-card bg-card/60 border border-border/50 rounded-2xl p-6 min-h-[215px] hover:border-primary/70 hover:-translate-y-1.5 hover:shadow-[0_14px_35px_-8px_rgba(168,85,247,0.22)] transition-all duration-300 ease-out"
     >
       {/* Top Header Row */}
-      <div className="space-y-3">
+      <div className="space-y-3.5">
         <div className="flex items-start justify-between gap-2">
           <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">
             {info.name}
@@ -68,13 +68,13 @@ function ExactAlgorithmCard({
             {difficulty}
           </span>
         </div>
-        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3 min-h-[52px]">
+        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3 min-h-[58px]">
           {info.description}
         </p>
       </div>
 
       {/* Bottom Footer Row */}
-      <div className="flex items-center justify-between mt-5 pt-4 border-t border-border/40">
+      <div className="flex items-center justify-between mt-6 pt-4 border-t border-border/40">
         <span className="text-[11px] font-semibold px-3 py-1 rounded-full bg-secondary text-secondary-foreground border border-border/40 capitalize">
           {info.category === 'sorting' ? 'Sorting' : 'Searching'}
         </span>
@@ -94,7 +94,7 @@ export default function AlgoPage() {
     <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300">
       <Header view="home" />
 
-      <div className="flex-1 px-6 lg:px-12 py-10 max-w-[1280px] mx-auto w-full space-y-10">
+      <div className="flex-1 px-6 lg:px-12 py-10 max-w-[1180px] mx-auto w-full space-y-10">
         {/* Page Hero */}
         <div className="space-y-2 pt-2">
           <h1 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight">
@@ -177,7 +177,7 @@ export default function AlgoPage() {
               </div>
 
               {/* 3-Column Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {SORTING_ALGOS.map(({ key, difficulty }) => (
                   <ExactAlgorithmCard
                     key={key}
@@ -199,7 +199,7 @@ export default function AlgoPage() {
               </div>
 
               {/* 3-Column Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {SEARCHING_ALGOS.map(({ key, difficulty }) => (
                   <ExactAlgorithmCard
                     key={key}
