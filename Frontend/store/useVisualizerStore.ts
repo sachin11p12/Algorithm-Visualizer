@@ -241,7 +241,6 @@ export const useVisualizerStore = create<VisualizerState>((set, get) => {
         set({ isPlaying: false, isFinished: true });
       }
     },
-
     setIsCustomModalOpen: (open: boolean) => {
       set({ isCustomModalOpen: open });
     },
