@@ -129,17 +129,17 @@ export default function AlgoPage() {
                 <Info className="w-5 h-5" />
               </button>
 
-              {/* Framer Motion Smooth Popover - Opens Above Icon */}
+              {/* Framer Motion Smooth Popover */}
               <AnimatePresence>
                 {showInfoPopover && (
                   <motion.div
-                    initial={{ opacity: 0, y: 16, scale: 0.95 }}
+                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 12, scale: 0.95 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.95 }}
                     transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                     onMouseEnter={() => setShowInfoPopover(true)}
                     onMouseLeave={() => setShowInfoPopover(false)}
-                    className="absolute right-0 bottom-full mb-3 z-50 w-72 sm:w-[310px] p-6 glass-card bg-card/95 backdrop-blur-xl border border-border/80 rounded-2xl shadow-2xl text-left space-y-5 select-none"
+                    className="absolute right-0 top-11 z-50 w-72 sm:w-[310px] p-6 glass-card bg-card/95 backdrop-blur-xl border border-border/80 rounded-2xl shadow-2xl text-left space-y-5 select-none"
                   >
                     <div className="space-y-2">
                       <p className="text-xs sm:text-sm text-foreground leading-relaxed">
@@ -163,7 +163,7 @@ export default function AlgoPage() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{
                               duration: 0.28,
-                              delay: 0.06 * itemIdx,
+                              delay: 0.10 * itemIdx,
                               ease: [0.16, 1, 0.3, 1],
                             }}
                             whileHover={{ y: -5, scale: 1.08 }}
