@@ -1,14 +1,14 @@
 'use client';
 
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useVisualizerStore } from '@/store/useVisualizerStore';
 import { ALGORITHM_DATA } from '@/lib/algorithmData';
-import { Target, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Target } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export const VisualizerCanvas: React.FC = () => {
-  const { steps, currentStepIdx, algorithm, searchTarget } = useVisualizerStore();
+  const { steps, currentStepIdx, algorithm, searchTarget, speed } = useVisualizerStore();
 
   const currentStep = steps[currentStepIdx] || {
     array: [],
@@ -20,7 +20,7 @@ export const VisualizerCanvas: React.FC = () => {
   const currentAlgo = ALGORITHM_DATA[algorithm];
   const maxVal = Math.max(...array, 1);
 
-  // Helper to resolve bar color class & inline styling
+  // Helper to resolve bar color class & status
   const getBarStatus = (index: number) => {
     if (highlights.foundIndex === index) return 'found';
     if (highlights.swapping?.includes(index)) return 'swapping';
@@ -35,6 +35,9 @@ export const VisualizerCanvas: React.FC = () => {
     const [low, high] = highlights.searchRange;
     return index >= low && index <= high;
   };
+
+  // Dynamic animation duration matched to step execution speed
+  const animDuration = Math.max(0.22 / speed, 0.08);
 
   return (
     <div className="w-full glass-card rounded-2xl p-4 lg:p-6 flex flex-col justify-between space-y-6 min-h-[380px] sm:min-h-[440px]">
@@ -57,89 +60,92 @@ export const VisualizerCanvas: React.FC = () => {
 
       {/* Main Array Bar Container */}
       <div className="relative w-full h-[280px] sm:h-[340px] flex items-end justify-center gap-1.5 sm:gap-2 px-2 pt-10 pb-10">
-        <AnimatePresence mode="popLayout">
-          {array.map((value, idx) => {
-            const status = getBarStatus(idx);
-            // Calculate proportional height relative to max element value (5% for min, 100% for max)
-            const heightPercent = Math.max(Math.round((value / maxVal) * 100), 6);
-            const inRange = isIndexInSearchRange(idx);
-            const isActiveAction = status === 'comparing' || status === 'swapping' || status === 'found';
+        {array.map((value, idx) => {
+          const status = getBarStatus(idx);
+          // Calculate proportional height relative to max element value (6% min, 100% max)
+          const heightPercent = Math.max(Math.round((value / maxVal) * 100), 6);
+          const inRange = isIndexInSearchRange(idx);
+          const isActiveAction = status === 'comparing' || status === 'swapping' || status === 'found';
 
-            let bgClass = 'bg-primary/75 border-primary/40';
-            let shadowClass = '';
-            let scaleClass = '';
+          let bgClass = 'bg-primary/75 border-primary/40';
+          let shadowClass = '';
 
-            if (status === 'found') {
-              bgClass = 'bg-gradient-to-t from-emerald-600 via-emerald-500 to-emerald-400 border-emerald-300';
-              shadowClass = 'shadow-[0_0_25px_rgba(16,185,129,0.7)] z-20';
-              scaleClass = 'scale-110';
-            } else if (status === 'swapping') {
-              bgClass = 'bg-gradient-to-t from-rose-600 via-pink-600 to-rose-400 border-rose-300';
-              shadowClass = 'shadow-[0_0_25px_rgba(244,63,94,0.7)] z-20';
-              scaleClass = 'scale-110 animate-pulse';
-            } else if (status === 'comparing') {
-              bgClass = 'bg-gradient-to-t from-amber-500 via-amber-400 to-yellow-300 border-amber-200';
-              shadowClass = 'shadow-[0_0_20px_rgba(245,158,11,0.6)] z-20';
-              scaleClass = 'scale-110';
-            } else if (status === 'selected') {
-              bgClass = 'bg-gradient-to-t from-purple-600 via-indigo-600 to-purple-400 border-purple-300';
-              shadowClass = 'shadow-[0_0_20px_rgba(168,85,247,0.6)] z-20';
-              scaleClass = 'scale-105';
-            } else if (status === 'sorted') {
-              bgClass = 'bg-gradient-to-t from-emerald-600/80 to-teal-400/80 border-emerald-400/50';
-            }
+          if (status === 'found') {
+            bgClass = 'bg-gradient-to-t from-emerald-600 via-emerald-500 to-emerald-400 border-emerald-300';
+            shadowClass = 'shadow-[0_0_25px_rgba(16,185,129,0.7)] z-20';
+          } else if (status === 'swapping') {
+            bgClass = 'bg-gradient-to-t from-rose-600 via-pink-600 to-rose-400 border-rose-300';
+            shadowClass = 'shadow-[0_0_25px_rgba(244,63,94,0.8)] z-20';
+          } else if (status === 'comparing') {
+            bgClass = 'bg-gradient-to-t from-amber-500 via-amber-400 to-yellow-300 border-amber-200';
+            shadowClass = 'shadow-[0_0_20px_rgba(245,158,11,0.7)] z-20';
+          } else if (status === 'selected') {
+            bgClass = 'bg-gradient-to-t from-purple-600 via-indigo-600 to-purple-400 border-purple-300';
+            shadowClass = 'shadow-[0_0_20px_rgba(168,85,247,0.7)] z-20';
+          } else if (status === 'sorted') {
+            bgClass = 'bg-gradient-to-t from-emerald-600/80 to-teal-400/80 border-emerald-400/50';
+          }
 
-            return (
+          const scaleVal = status === 'swapping' || status === 'found' ? 1.08 : status === 'comparing' ? 1.05 : 1;
+
+          return (
+            <motion.div
+              key={idx}
+              layout
+              initial={false}
+              animate={{
+                height: `${heightPercent}%`,
+                scale: scaleVal,
+              }}
+              transition={{
+                height: { type: 'spring', stiffness: 300, damping: 25, duration: animDuration },
+                scale: { duration: 0.15 },
+                layout: { type: 'spring', stiffness: 350, damping: 28 },
+              }}
+              className={cn(
+                'relative flex items-start justify-center rounded-t-lg border shadow-sm group select-none transition-colors duration-200',
+                bgClass,
+                shadowClass,
+                inRange && status === 'default' && 'ring-2 ring-sky-400/60 bg-sky-500/40'
+              )}
+              style={{
+                width: `${Math.max(100 / array.length - 1, 1.8)}%`,
+                minWidth: array.length > 30 ? '10px' : '20px',
+                maxWidth: '52px',
+              }}
+            >
+              {/* Floating Value Label Above Bar */}
               <motion.div
-                key={`${idx}-${value}`}
-                layout
-                initial={{ opacity: 0, scaleY: 0 }}
-                animate={{ opacity: 1, scaleY: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.2, ease: 'easeOut' }}
+                key={`val-${idx}`}
+                initial={false}
+                animate={{ scale: isActiveAction ? 1.25 : 1 }}
+                transition={{ duration: 0.15 }}
                 className={cn(
-                  'relative flex items-start justify-center rounded-t-lg transition-all duration-200 border shadow-sm group select-none',
-                  bgClass,
-                  shadowClass,
-                  scaleClass,
-                  inRange && status === 'default' && 'ring-2 ring-sky-400/60 bg-sky-500/40'
+                  'absolute -top-7 font-extrabold whitespace-nowrap z-30 select-none pointer-events-none transition-colors duration-150',
+                  isActiveAction
+                    ? 'text-xs sm:text-sm font-black text-foreground drop-shadow-md'
+                    : 'text-[10px] sm:text-xs text-foreground/90 font-bold'
                 )}
-                style={{
-                  height: `${heightPercent}%`,
-                  width: `${Math.max(100 / array.length - 1, 1.8)}%`,
-                  minWidth: array.length > 30 ? '10px' : '20px',
-                  maxWidth: '52px',
-                }}
               >
-                {/* Floating Value Label Above Bar */}
-                <div
+                {value}
+              </motion.div>
+
+              {/* Array Index Badge Below Bar */}
+              <div className="absolute -bottom-8 flex items-center justify-center pointer-events-none">
+                <span
                   className={cn(
-                    'absolute -top-7 transition-all duration-200 font-extrabold whitespace-nowrap z-30 select-none pointer-events-none',
+                    'px-1.5 py-0.5 rounded-md font-mono text-[9px] sm:text-[11px] font-bold border transition-all duration-150 shadow-sm select-none',
                     isActiveAction
-                      ? 'text-xs sm:text-sm scale-125 font-black text-foreground drop-shadow-md'
-                      : 'text-[10px] sm:text-xs text-foreground/90 font-bold'
+                      ? 'bg-primary text-primary-foreground border-primary scale-110'
+                      : 'bg-secondary/90 text-muted-foreground border-border/60 hover:text-foreground'
                   )}
                 >
-                  {value}
-                </div>
-
-                {/* Array Index Badge Below Bar */}
-                <div className="absolute -bottom-8 flex items-center justify-center pointer-events-none">
-                  <span
-                    className={cn(
-                      'px-1.5 py-0.5 rounded-md font-mono text-[9px] sm:text-[11px] font-bold border transition-colors shadow-sm select-none',
-                      isActiveAction
-                        ? 'bg-primary text-primary-foreground border-primary scale-110'
-                        : 'bg-secondary/90 text-muted-foreground border-border/60 hover:text-foreground'
-                    )}
-                  >
-                    {idx}
-                  </span>
-                </div>
-              </motion.div>
-            );
-          })}
-        </AnimatePresence>
+                  {idx}
+                </span>
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
 
       {/* Visualizer Color Legend */}
@@ -168,4 +174,3 @@ export const VisualizerCanvas: React.FC = () => {
     </div>
   );
 };
-
