@@ -31,6 +31,50 @@ import {
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 
+function TypewriterHeadline() {
+  const words = [
+    'scalable web apps & RESTful APIs.',
+    'high-performance Spring Boot backends.',
+    'interactive DSA visualizer engines.',
+    'modern React & Next.js platforms.',
+  ];
+
+  const [index, setIndex] = React.useState(0);
+  const [subIndex, setSubIndex] = React.useState(0);
+  const [reverse, setReverse] = React.useState(false);
+
+  React.useEffect(() => {
+    if (subIndex === words[index].length + 1 && !reverse) {
+      const timeout = setTimeout(() => {
+        setReverse(true);
+      }, 2400);
+      return () => clearTimeout(timeout);
+    }
+
+    if (subIndex === 0 && reverse) {
+      setReverse(false);
+      setIndex((prev) => (prev + 1) % words.length);
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      setSubIndex((prev) => prev + (reverse ? -1 : 1));
+    }, reverse ? 30 : 65);
+
+    return () => clearTimeout(timeout);
+  }, [subIndex, index, reverse]);
+
+  return (
+    <h1 className="text-4xl sm:text-6xl font-black text-foreground tracking-tight leading-[1.15] min-h-[110px] sm:min-h-[140px]">
+      Full-Stack Developer crafting{' '}
+      <span className="bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">
+        {words[index].substring(0, subIndex)}
+      </span>
+      <span className="inline-block w-[3px] h-8 sm:h-12 ml-1 bg-primary animate-pulse align-middle" />
+    </h1>
+  );
+}
+
 export default function PortfolioHomePage() {
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300">
@@ -53,14 +97,8 @@ export default function PortfolioHomePage() {
               </div>
             </div>
 
-            {/* Main Headline */}
-            <h1 className="text-4xl sm:text-6xl font-black text-foreground tracking-tight leading-[1.15]">
-              Full-Stack Developer crafting{' '}
-              <span className="bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                scalable web apps
-              </span>{' '}
-              & RESTful APIs.
-            </h1>
+            {/* Main Headline with Typewriter Effect */}
+            <TypewriterHeadline />
 
             {/* Summary */}
             <p className="text-base sm:text-lg text-muted-foreground font-medium leading-relaxed max-w-3xl">
