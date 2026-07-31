@@ -10,6 +10,7 @@ import {
   Cpu,
   Github,
   Download,
+  FileText,
   Sparkles,
   Menu,
   X,
@@ -99,17 +100,15 @@ export const Header: React.FC<HeaderProps> = () => {
         {/* Right: Actions (Theme Toggle, Download Resume, GitHub) */}
         <div className="hidden md:flex items-center space-x-2.5">
           {/* Download Resume Button */}
-          <a
-            href="/Sachin_Tiwari_Resume.pdf"
-            download="Sachin_Tiwari_Resume.pdf"
+          <Link
+            href="/resume"
             target="_blank"
-            rel="noopener noreferrer"
             className="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl bg-primary text-primary-foreground font-semibold text-xs transition-all shadow-sm hover:bg-primary/90 active:scale-95"
-            title="Download Resume PDF"
+            title="View & Print Resume PDF"
           >
-            <Download className="w-3.5 h-3.5" />
-            <span>Download Resume</span>
-          </a>
+            <FileText className="w-3.5 h-3.5" />
+            <span>Resume</span>
+          </Link>
 
           {/* GitHub Link */}
           <a
@@ -174,16 +173,15 @@ export const Header: React.FC<HeaderProps> = () => {
           ))}
 
           <div className="pt-2 flex items-center space-x-2">
-            <a
-              href="/Sachin_Tiwari_Resume.pdf"
-              download="Sachin_Tiwari_Resume.pdf"
+            <Link
+              href="/resume"
               target="_blank"
-              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
               className="flex-1 flex items-center justify-center space-x-1.5 px-3 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-semibold"
             >
-              <Download className="w-4 h-4" />
-              <span>Download Resume</span>
-            </a>
+              <FileText className="w-4 h-4" />
+              <span>Resume PDF</span>
+            </Link>
 
             <a
               href="https://github.com/sachin11p12"
