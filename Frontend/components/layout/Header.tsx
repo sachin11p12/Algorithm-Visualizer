@@ -9,7 +9,7 @@ import {
   Moon,
   Cpu,
   Github,
-  FileText,
+  Download,
   Sparkles,
   Menu,
   X,
@@ -96,17 +96,19 @@ export const Header: React.FC<HeaderProps> = () => {
           })}
         </nav>
 
-        {/* Right: Actions (Theme Toggle, Resume, GitHub) */}
+        {/* Right: Actions (Theme Toggle, Download Resume, GitHub) */}
         <div className="hidden md:flex items-center space-x-2.5">
-          {/* Resume Button */}
+          {/* Download Resume Button */}
           <a
-            href="#"
+            href="/Sachin_Tiwari_Resume.pdf"
+            download="Sachin_Tiwari_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-secondary hover:bg-secondary/80 border border-border/50 text-xs font-semibold text-foreground transition-all shadow-sm"
+            className="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl bg-primary text-primary-foreground font-semibold text-xs transition-all shadow-sm hover:bg-primary/90 active:scale-95"
+            title="Download Resume PDF"
           >
-            <FileText className="w-3.5 h-3.5 text-primary" />
-            <span>Resume</span>
+            <Download className="w-3.5 h-3.5" />
+            <span>Download Resume</span>
           </a>
 
           {/* GitHub Link */}
@@ -173,13 +175,14 @@ export const Header: React.FC<HeaderProps> = () => {
 
           <div className="pt-2 flex items-center space-x-2">
             <a
-              href="#"
+              href="/Sachin_Tiwari_Resume.pdf"
+              download="Sachin_Tiwari_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center space-x-1.5 px-3 py-2 rounded-xl bg-secondary border border-border/50 text-xs font-semibold text-foreground"
+              className="flex-1 flex items-center justify-center space-x-1.5 px-3 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-semibold"
             >
-              <FileText className="w-4 h-4 text-primary" />
-              <span>Resume</span>
+              <Download className="w-4 h-4" />
+              <span>Download Resume</span>
             </a>
 
             <a
