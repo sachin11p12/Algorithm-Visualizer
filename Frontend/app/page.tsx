@@ -22,6 +22,7 @@ import {
   Brain,
   CheckCircle2,
   ExternalLink,
+  FileText,
   Layers,
   ShieldCheck,
   Server,
@@ -124,6 +125,15 @@ export default function PortfolioHomePage() {
               >
                 View Projects
               </a>
+
+              <Link
+                href="/resume"
+                target="_blank"
+                className="px-6 py-3 rounded-xl bg-secondary hover:bg-secondary/80 border border-border/50 text-foreground font-semibold text-sm transition-all flex items-center space-x-2"
+              >
+                <FileText className="w-4 h-4 text-primary" />
+                <span>View Resume</span>
+              </Link>
 
               <a
                 href="mailto:sachin11p12@gmail.com"
