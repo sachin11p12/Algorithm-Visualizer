@@ -188,6 +188,14 @@ export default function ResumePage() {
             <div>
               <span className="font-bold text-slate-900">Java Web Development – HCL Tech: </span>
               <span>Practical experience in Java backend development with Spring Boot for enterprise apps, SQL, and Git.</span>
+              <a
+                href="/HCL_JWD_Certificate.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-2 text-blue-700 hover:underline font-semibold text-[11px]"
+              >
+                [View Certificate]
+              </a>
             </div>
             <div>
               <span className="font-bold text-slate-900">AI Agents & Agentic AI: </span>
