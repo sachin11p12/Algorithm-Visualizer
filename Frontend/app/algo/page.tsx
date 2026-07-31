@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, ChevronRight, Info } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -116,7 +117,7 @@ export default function AlgoPage() {
               <h2 className="text-lg font-bold text-foreground tracking-tight">Array</h2>
             </div>
 
-            {/* Info Button & Popover */}
+            {/* Info Button & Animated Popover */}
             <div className="relative">
               <button
                 onMouseEnter={() => setShowInfoPopover(true)}
@@ -128,40 +129,46 @@ export default function AlgoPage() {
                 <Info className="w-5 h-5" />
               </button>
 
-              {/* Hover Popover */}
-              {showInfoPopover && (
-                <div
-                  onMouseEnter={() => setShowInfoPopover(true)}
-                  onMouseLeave={() => setShowInfoPopover(false)}
-                  className="absolute right-0 top-10 z-50 w-80 sm:w-96 p-5 glass-card bg-card/95 backdrop-blur-xl border border-border/80 rounded-2xl shadow-2xl text-left space-y-4 animate-in fade-in zoom-in-95 duration-150"
-                >
-                  <div className="space-y-1.5">
-                    <p className="text-xs sm:text-sm text-foreground leading-relaxed">
-                      <strong className="font-bold text-foreground">About:</strong> An array is a data structure that stores multiple values of the same type in a single variable. Each value is stored at a specific index, starting from 0.
-                    </p>
-                  </div>
-
-                  {/* Representation */}
-                  <div className="space-y-2.5 pt-2 border-t border-border/40">
-                    <h4 className="text-xs font-bold text-foreground">Representation:</h4>
-                    <div className="flex items-center justify-start gap-2.5 pt-1">
-                      {[
-                        { val: 10, idx: '[0]' },
-                        { val: 20, idx: '[1]' },
-                        { val: 30, idx: '[2]' },
-                        { val: 40, idx: '[3]' },
-                      ].map(({ val, idx }) => (
-                        <div key={idx} className="flex flex-col items-center gap-1.5">
-                          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-blue-600 dark:bg-blue-500 text-white font-black text-xs sm:text-sm flex items-center justify-center shadow-lg shadow-blue-500/25">
-                            {val}
-                          </div>
-                          <span className="font-mono text-[11px] text-muted-foreground font-semibold">{idx}</span>
-                        </div>
-                      ))}
+              {/* Framer Motion Smooth Popover */}
+              <AnimatePresence>
+                {showInfoPopover && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.95 }}
+                    transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                    onMouseEnter={() => setShowInfoPopover(true)}
+                    onMouseLeave={() => setShowInfoPopover(false)}
+                    className="absolute right-0 top-11 z-50 w-72 sm:w-[310px] p-6 glass-card bg-card/95 backdrop-blur-xl border border-border/80 rounded-2xl shadow-2xl text-left space-y-5 select-none"
+                  >
+                    <div className="space-y-2">
+                      <p className="text-xs sm:text-sm text-foreground leading-relaxed">
+                        <strong className="font-bold text-foreground">About:</strong> An array is a data structure that stores multiple values of the same type in a single variable. Each value is stored at a specific index, starting from 0.
+                      </p>
                     </div>
-                  </div>
-                </div>
-              )}
+
+                    {/* Representation */}
+                    <div className="space-y-3 pt-3 border-t border-border/40">
+                      <h4 className="text-xs font-bold text-foreground">Representation:</h4>
+                      <div className="flex items-center justify-between gap-2 pt-1">
+                        {[
+                          { val: 10, idx: '[0]' },
+                          { val: 20, idx: '[1]' },
+                          { val: 30, idx: '[2]' },
+                          { val: 40, idx: '[3]' },
+                        ].map(({ val, idx }) => (
+                          <div key={idx} className="flex flex-col items-center gap-1.5">
+                            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-blue-600 dark:bg-blue-500 text-white font-black text-xs sm:text-sm flex items-center justify-center shadow-lg shadow-blue-500/25">
+                              {val}
+                            </div>
+                            <span className="font-mono text-[11px] text-muted-foreground font-semibold">{idx}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
 
