@@ -31,6 +31,7 @@ import {
 } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { GitHubCalendarSection } from '@/components/portfolio/GitHubCalendarSection';
 
 function TypewriterHeadline() {
   const words = [
@@ -452,6 +453,9 @@ export default function PortfolioHomePage() {
 
           </div>
         </section>
+
+        {/* ── GITHUB CONTRIBUTIONS SECTION ── */}
+        <GitHubCalendarSection />
 
         {/* ── 5. EDUCATION & CERTIFICATIONS ── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
