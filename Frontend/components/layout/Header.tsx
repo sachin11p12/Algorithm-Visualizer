@@ -9,7 +9,6 @@ import {
   Moon,
   Cpu,
   Github,
-  Download,
   FileText,
   Sparkles,
   Menu,
@@ -39,8 +38,24 @@ export const Header: React.FC<HeaderProps> = () => {
     { label: 'Skills', href: '#skills' },
     { label: 'Experience', href: '#experience' },
     { label: 'Algo Visualizer', href: '/algo', isFeatured: true },
-    { label: 'Contact', href: 'mailto:Sachin11p12@gmail.com' },
+    { label: 'Contact', href: '#contact' },
   ];
+
+  // Smooth scroll handler preventing #hash from appearing in URL bar
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      if (pathname !== '/') {
+        window.location.href = `/${href}`;
+        return;
+      }
+      const targetId = href.replace('#', '');
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
     <header className="sticky top-0 z-40 w-full glass-panel border-b border-border/40 px-4 lg:px-8 py-3 transition-colors duration-300">
@@ -82,18 +97,19 @@ export const Header: React.FC<HeaderProps> = () => {
             }
 
             return (
-              <Link
+              <a
                 key={item.label}
                 href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
                 className={cn(
-                  'px-3 py-1.5 rounded-xl text-xs font-semibold transition-colors',
+                  'px-3 py-1.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer',
                   isActive
                     ? 'text-primary font-bold bg-primary/10'
                     : 'text-muted-foreground hover:text-foreground hover:bg-secondary/60'
                 )}
               >
                 {item.label}
-              </Link>
+              </a>
             );
           })}
         </nav>
@@ -160,18 +176,21 @@ export const Header: React.FC<HeaderProps> = () => {
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-border/40 mt-3 pt-3 pb-4 px-4 space-y-2 bg-card/95 backdrop-blur-md">
           {navItems.map((item) => (
-            <Link
+            <a
               key={item.label}
               href={item.href}
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => {
+                setMobileMenuOpen(false);
+                handleNavClick(e, item.href);
+              }}
               className={cn(
-                'flex items-center space-x-2 px-3 py-2 rounded-xl text-sm font-semibold transition-colors',
+                'flex items-center space-x-2 px-3 py-2 rounded-xl text-sm font-semibold transition-colors cursor-pointer',
                 item.isFeatured ? 'bg-primary/10 text-primary border border-primary/20' : 'text-foreground hover:bg-secondary'
               )}
             >
               {item.isFeatured && <Sparkles className="w-4 h-4" />}
               <span>{item.label}</span>
-            </Link>
+            </a>
           ))}
 
           <div className="pt-2 flex items-center space-x-2">
