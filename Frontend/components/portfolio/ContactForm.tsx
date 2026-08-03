@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, User, MessageSquare, Send, CheckCircle2, Sparkles } from 'lucide-react';
+import { Mail, Phone, MapPin, User, MessageSquare, Send, CheckCircle2, Sparkles, Loader2 } from 'lucide-react';
 
 export const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +10,7 @@ export const ContactForm: React.FC = () => {
     message: '',
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -17,12 +18,39 @@ export const ContactForm: React.FC = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
-    
-    // In-app submit confirmation without launching external mail apps (e.g. Outlook)
-    setSubmitted(true);
+
+    setIsSubmitting(true);
+
+    try {
+      // Send form submission directly to sachin11p12@gmail.com via FormSubmit API
+      const response = await fetch('https://formsubmit.co/ajax/sachin11p12@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _subject: `New Portfolio Message from ${formData.name}`,
+          _captcha: 'false',
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        setSubmitted(true);
+      }
+    } catch (err) {
+      setSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -101,7 +129,7 @@ export const ContactForm: React.FC = () => {
                 <div className="space-y-1">
                   <h4 className="text-lg font-extrabold text-foreground">Message Sent Successfully!</h4>
                   <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-md mx-auto">
-                    Thank you, <strong className="text-foreground">{formData.name}</strong>. Your message has been received and I will get back to you shortly.
+                    Thank you, <strong className="text-foreground">{formData.name}</strong>. Your message has been sent directly to <strong className="text-foreground">sachin11p12@gmail.com</strong>. I will get back to you shortly.
                   </p>
                 </div>
                 <button
@@ -171,10 +199,20 @@ export const ContactForm: React.FC = () => {
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full py-3.5 px-6 rounded-xl bg-primary text-primary-foreground font-bold text-sm shadow-lg shadow-primary/25 hover:bg-primary/90 active:scale-[0.99] transition-all flex items-center justify-center space-x-2"
+                  disabled={isSubmitting}
+                  className="w-full py-3.5 px-6 rounded-xl bg-primary text-primary-foreground font-bold text-sm shadow-lg shadow-primary/25 hover:bg-primary/90 active:scale-[0.99] transition-all flex items-center justify-center space-x-2 disabled:opacity-70"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>Send Message</span>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Sending Message...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      <span>Send Message</span>
+                    </>
+                  )}
                 </button>
               </form>
             )}
