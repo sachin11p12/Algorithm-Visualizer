@@ -137,8 +137,12 @@ export default function PortfolioHomePage() {
               </Link>
 
               <a
-                href="mailto:sachin11p12@gmail.com"
-                className="px-6 py-3 rounded-xl bg-secondary hover:bg-secondary/80 border border-border/50 text-foreground font-semibold text-sm transition-all"
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="px-6 py-3 rounded-xl bg-secondary hover:bg-secondary/80 border border-border/50 text-foreground font-semibold text-sm transition-all cursor-pointer"
               >
                 Contact Me
               </a>

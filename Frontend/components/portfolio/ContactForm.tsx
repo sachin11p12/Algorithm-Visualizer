@@ -20,12 +20,8 @@ export const ContactForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
-
-    // Create mailto fallback link with prefilled fields
-    const mailtoSubject = encodeURIComponent(`Portfolio Message from ${formData.name}`);
-    const mailtoBody = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
     
-    window.location.href = `mailto:sachin11p12@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
+    // In-app submit confirmation without launching external mail apps (e.g. Outlook)
     setSubmitted(true);
   };
 
@@ -53,36 +49,26 @@ export const ContactForm: React.FC = () => {
 
             <div className="space-y-4 text-xs sm:text-sm">
               {/* Direct Email */}
-              <a
-                href="mailto:sachin11p12@gmail.com"
-                className="flex items-center space-x-3.5 p-3.5 rounded-xl bg-secondary/40 border border-border/40 hover:border-primary/50 transition-all group"
-              >
-                <div className="p-2.5 rounded-xl bg-primary/10 text-primary group-hover:scale-105 transition-transform">
+              <div className="flex items-center space-x-3.5 p-3.5 rounded-xl bg-secondary/40 border border-border/40">
+                <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
                   <Mail className="w-4 h-4" />
                 </div>
                 <div>
                   <p className="text-[11px] font-bold text-muted-foreground uppercase">Email Address</p>
-                  <p className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                    sachin11p12@gmail.com
-                  </p>
+                  <p className="font-semibold text-foreground">sachin11p12@gmail.com</p>
                 </div>
-              </a>
+              </div>
 
               {/* Direct Phone */}
-              <a
-                href="tel:6386430534"
-                className="flex items-center space-x-3.5 p-3.5 rounded-xl bg-secondary/40 border border-border/40 hover:border-primary/50 transition-all group"
-              >
-                <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-500 group-hover:scale-105 transition-transform">
+              <div className="flex items-center space-x-3.5 p-3.5 rounded-xl bg-secondary/40 border border-border/40">
+                <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-500">
                   <Phone className="w-4 h-4" />
                 </div>
                 <div>
                   <p className="text-[11px] font-bold text-muted-foreground uppercase">Phone Number</p>
-                  <p className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                    +91 6386430534
-                  </p>
+                  <p className="font-semibold text-foreground">+91 6386430534</p>
                 </div>
-              </a>
+              </div>
 
               {/* Location */}
               <div className="flex items-center space-x-3.5 p-3.5 rounded-xl bg-secondary/40 border border-border/40">
@@ -110,19 +96,23 @@ export const ContactForm: React.FC = () => {
             </div>
 
             {submitted ? (
-              <div className="p-6 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-center space-y-3">
-                <CheckCircle2 className="w-8 h-8 text-emerald-500 mx-auto" />
-                <h4 className="text-base font-bold text-foreground">Thank You!</h4>
-                <p className="text-xs text-muted-foreground leading-relaxed max-w-md mx-auto">
-                  Your message draft has been generated. If your mail client did not open automatically, send directly to{' '}
-                  <strong className="text-foreground">sachin11p12@gmail.com</strong>.
-                </p>
+              <div className="p-8 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center space-y-4">
+                <CheckCircle2 className="w-10 h-10 text-emerald-500 mx-auto" />
+                <div className="space-y-1">
+                  <h4 className="text-lg font-extrabold text-foreground">Message Sent Successfully!</h4>
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-md mx-auto">
+                    Thank you, <strong className="text-foreground">{formData.name}</strong>. Your message has been received and I will get back to you shortly.
+                  </p>
+                </div>
                 <button
                   type="button"
-                  onClick={() => setSubmitted(false)}
-                  className="text-xs font-semibold text-primary underline pt-2"
+                  onClick={() => {
+                    setSubmitted(false);
+                    setFormData({ name: '', email: '', message: '' });
+                  }}
+                  className="px-4 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-bold shadow-md hover:bg-primary/90 transition-all"
                 >
-                  Send another message
+                  Send Another Message
                 </button>
               </div>
             ) : (

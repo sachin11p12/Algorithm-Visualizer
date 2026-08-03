@@ -158,7 +158,16 @@ export const Footer: React.FC = () => {
           </span>
           <div className="flex items-center space-x-4 text-xs text-muted-foreground">
             <VisitorCounter />
-            <a href="mailto:Sachin11p12@gmail.com" className="hover:text-foreground transition-colors font-medium">Contact</a>
+            <a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="hover:text-foreground transition-colors font-medium cursor-pointer"
+            >
+              Contact
+            </a>
           </div>
         </div>
       </div>
