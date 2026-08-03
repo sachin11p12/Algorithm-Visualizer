@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/layout/ThemeProvider';
+import { ScrollToTop } from '@/components/layout/ScrollToTop';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -29,9 +30,9 @@ export default function RootLayout({
       <body className="min-h-screen bg-background font-sans text-foreground transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           {children}
+          <ScrollToTop />
         </ThemeProvider>
       </body>
     </html>
-
   );
 }
