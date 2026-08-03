@@ -182,6 +182,9 @@ export default function PortfolioHomePage() {
           </div>
         </section>
 
+        {/* ── GITHUB CONTRIBUTIONS SECTION ── */}
+        <GitHubCalendarSection />
+
         {/* ── 2. TECHNICAL SKILLS SECTION ── */}
         <section id="skills" className="space-y-8 scroll-mt-20">
           <div className="space-y-2 border-b border-border/40 pb-4">
@@ -453,9 +456,6 @@ export default function PortfolioHomePage() {
 
           </div>
         </section>
-
-        {/* ── GITHUB CONTRIBUTIONS SECTION ── */}
-        <GitHubCalendarSection />
 
         {/* ── 5. EDUCATION & CERTIFICATIONS ── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
