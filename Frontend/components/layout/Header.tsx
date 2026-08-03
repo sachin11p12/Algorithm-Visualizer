@@ -16,6 +16,7 @@ import {
   X,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { VisitorCounter } from '@/components/layout/VisitorCounter';
 
 interface HeaderProps {
   view?: 'home' | 'visualizer';
@@ -97,8 +98,9 @@ export const Header: React.FC<HeaderProps> = () => {
           })}
         </nav>
 
-        {/* Right: Actions (Theme Toggle, Download Resume, GitHub) */}
+        {/* Right: Actions (VisitorCounter, Theme Toggle, Download Resume, GitHub) */}
         <div className="hidden md:flex items-center space-x-2.5">
+          <VisitorCounter />
           {/* Download Resume Button */}
           <Link
             href="/resume"
