@@ -31,6 +31,7 @@ import {
 } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { ContactForm } from '@/components/portfolio/ContactForm';
 
 function TypewriterHeadline() {
   const words = [
@@ -584,38 +585,7 @@ export default function PortfolioHomePage() {
         </section>
 
         {/* ── 7. CONTACT & GET IN TOUCH SECTION ── */}
-        <section id="contact" className="space-y-8 scroll-mt-20">
-          <div className="p-8 lg:p-12 rounded-3xl glass-card bg-gradient-to-br from-card via-card/80 to-primary/5 border border-primary/20 space-y-6 text-center max-w-3xl mx-auto shadow-xl">
-            <div className="p-3 w-fit mx-auto rounded-2xl bg-primary/10 text-primary border border-primary/20">
-              <Mail className="w-6 h-6" />
-            </div>
-
-            <div className="space-y-2">
-              <h2 className="text-2xl sm:text-4xl font-black text-foreground">Let&apos;s Build Something Great Together</h2>
-              <p className="text-xs sm:text-sm text-muted-foreground max-w-lg mx-auto">
-                I am open to full-stack software development opportunities, API engineering, and innovative web projects.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-              <a
-                href="mailto:sachin11p12@gmail.com"
-                className="px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm shadow-lg shadow-primary/25 hover:bg-primary/90 transition-all flex items-center space-x-2"
-              >
-                <Mail className="w-4 h-4" />
-                <span>sachin11p12@gmail.com</span>
-              </a>
-
-              <a
-                href="tel:6386430534"
-                className="px-6 py-3 rounded-xl bg-secondary hover:bg-secondary/80 border border-border/50 text-foreground font-semibold text-sm transition-all flex items-center space-x-2"
-              >
-                <Phone className="w-4 h-4 text-primary" />
-                <span>+91 6386430534</span>
-              </a>
-            </div>
-          </div>
-        </section>
+        <ContactForm />
 
       </main>
 
