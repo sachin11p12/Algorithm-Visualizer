@@ -11,37 +11,41 @@ export const VisitorCounter: React.FC = () => {
     setMounted(true);
 
     async function updateVisitorCount() {
-      const STORAGE_KEY = 'algo_vis_visitor_count';
-      const HAS_VISITED_KEY = 'algo_vis_has_visited';
+      const STORAGE_KEY = 'real_portfolio_visitor_count';
+      const HAS_VISITED_KEY = 'real_portfolio_has_visited';
 
-      let count = 1284; // Base seed count
+      let currentCount = 1;
 
       try {
         const stored = localStorage.getItem(STORAGE_KEY);
         if (stored) {
-          count = parseInt(stored, 10);
+          currentCount = parseInt(stored, 10);
         }
 
         const hasVisited = sessionStorage.getItem(HAS_VISITED_KEY);
-        if (!hasVisited) {
-          count += 1;
-          sessionStorage.setItem(HAS_VISITED_KEY, 'true');
-          localStorage.setItem(STORAGE_KEY, count.toString());
-        }
+        const action = !hasVisited ? 'up' : 'current';
 
-        // Optional API hit
-        const apiRes = await fetch('https://api.counterapi.dev/v1/sachin11p12-algo-vis/visitors/up');
+        // Real Global Counter API for sachin11p12 portfolio
+        const apiRes = await fetch(`https://api.counterapi.dev/v1/sachin11p12-portfolio/visits/${action}`);
+
         if (apiRes.ok) {
           const data = await apiRes.json();
           if (data && typeof data.count === 'number') {
-            count = Math.max(data.count + 1200, count);
+            currentCount = data.count;
           }
+        } else if (!hasVisited) {
+          currentCount += 1;
+        }
+
+        if (!hasVisited) {
+          sessionStorage.setItem(HAS_VISITED_KEY, 'true');
+          localStorage.setItem(STORAGE_KEY, currentCount.toString());
         }
       } catch (e) {
-        // Fallback to stored count
+        // Fallback to local storage if API unreachable
       }
 
-      setVisitorCount(count);
+      setVisitorCount(currentCount);
     }
 
     updateVisitorCount();
