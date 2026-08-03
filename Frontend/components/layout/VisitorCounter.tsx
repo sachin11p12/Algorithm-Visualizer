@@ -60,7 +60,7 @@ export const VisitorCounter: React.FC = () => {
         <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
       </span>
       <Users className="w-3.5 h-3.5 text-primary" />
-      <span className="text-muted-foreground">Visitors:</span>
+      <span className="text-muted-foreground">Total Visitors:</span>
       <span className="text-foreground font-mono font-bold">
         {visitorCount !== null ? visitorCount.toLocaleString() : '...'}
       </span>
