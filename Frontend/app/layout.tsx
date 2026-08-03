@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/layout/ThemeProvider';
+import { log } from 'console';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -32,5 +33,6 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
+
   );
 }
