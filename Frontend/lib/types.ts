@@ -39,5 +39,7 @@ export interface AlgorithmInfo {
   stable: boolean;
   inPlace: boolean;
   description: string;
+  howItWorks?: string[];
+  whenToUse?: string;
   pseudocode: string[];
 }

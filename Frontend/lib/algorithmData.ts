@@ -13,6 +13,13 @@ export const ALGORITHM_DATA: Record<AlgorithmKey, AlgorithmInfo> = {
     inPlace: true,
     description:
       'Bubble Sort repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. Pass through the list is repeated until the list is sorted.',
+    howItWorks: [
+      'Iterate through the array from left to right.',
+      'Compare adjacent pairs (A[i] and A[i+1]).',
+      'Swap them if the left element is larger than the right element.',
+      'Repeat for all elements; after each full pass, the largest remaining element bubbles up to its final position.',
+    ],
+    whenToUse: 'Useful for small datasets or nearly sorted arrays where simple implementation is preferred.',
     pseudocode: [
       'procedure bubbleSort(A : list of sortable items)',
       '  n := length(A)',
@@ -38,6 +45,13 @@ export const ALGORITHM_DATA: Record<AlgorithmKey, AlgorithmInfo> = {
     inPlace: true,
     description:
       'Selection Sort divides the input list into two parts: a sorted sublist built up from left to right and an unsorted sublist. It repeatedly selects the smallest element from the unsorted sublist and moves it to the sorted sublist.',
+    howItWorks: [
+      'Divide the array into a sorted boundary on the left and unsorted region on the right.',
+      'Find the minimum element in the unsorted region.',
+      'Swap the minimum element with the first unsorted element.',
+      'Advance the sorted boundary by one position and repeat until sorted.',
+    ],
+    whenToUse: 'Good when memory writes are expensive, as it performs at most O(n) swaps.',
     pseudocode: [
       'procedure selectionSort(A : list of sortable items)',
       '  n := length(A)',
@@ -63,6 +77,13 @@ export const ALGORITHM_DATA: Record<AlgorithmKey, AlgorithmInfo> = {
     inPlace: true,
     description:
       'Insertion Sort builds the final sorted array one item at a time. It takes each element from the unsorted portion and inserts it into its correct position within the sorted portion.',
+    howItWorks: [
+      'Start from the second element (index 1) and consider it as the key to insert.',
+      'Compare key with elements in the sorted sub-array to its left.',
+      'Shift all sorted elements larger than key one position to the right.',
+      'Place the key in its correct sorted position.',
+    ],
+    whenToUse: 'Efficient for small datasets or online data streams that arrive continuously.',
     pseudocode: [
       'procedure insertionSort(A : list of sortable items)',
       '  for i := 1 to length(A)-1 do',
@@ -87,6 +108,12 @@ export const ALGORITHM_DATA: Record<AlgorithmKey, AlgorithmInfo> = {
     inPlace: false,
     description:
       'Merge Sort is a Divide and Conquer algorithm. It divides the input array into two halves, recursively sorts them, and then merges the two sorted halves back together.',
+    howItWorks: [
+      'Divide: Find the midpoint and split array into left and right halves.',
+      'Conquer: Recursively sort both sub-arrays.',
+      'Combine: Merge the two sorted sub-arrays by comparing front elements and putting the smaller item into the result.',
+    ],
+    whenToUse: 'Ideal for large datasets and linked lists requiring guaranteed O(n log n) sorting speed with stability.',
     pseudocode: [
       'procedure mergeSort(A, left, right)',
       '  if left < right then',
@@ -115,6 +142,13 @@ export const ALGORITHM_DATA: Record<AlgorithmKey, AlgorithmInfo> = {
     inPlace: true,
     description:
       'Quick Sort selects a "pivot" element from the array and partitions the other elements into two sub-arrays according to whether they are less than or greater than the pivot, then recursively sorts the sub-arrays.',
+    howItWorks: [
+      'Choose a pivot element (e.g. last element).',
+      'Partition array: move smaller elements left of pivot and larger elements right.',
+      'Place pivot in its correct sorted position.',
+      'Recursively apply Quick Sort to left and right sub-arrays.',
+    ],
+    whenToUse: 'General-purpose fast in-place sorting for arrays with excellent cache localization.',
     pseudocode: [
       'procedure quickSort(A, low, high)',
       '  if low < high then',
@@ -145,6 +179,13 @@ export const ALGORITHM_DATA: Record<AlgorithmKey, AlgorithmInfo> = {
     inPlace: true,
     description:
       'Heap Sort converts the array into a Max-Heap data structure. It repeatedly extracts the maximum element from the root and restores the heap property until all elements are sorted.',
+    howItWorks: [
+      'Build a Max-Heap from the input array.',
+      'Swap the maximum element (root at index 0) with the last element in the heap.',
+      'Reduce heap size by 1 and call heapify on root to restore heap property.',
+      'Repeat until all elements are extracted in ascending order.',
+    ],
+    whenToUse: 'Used when O(1) auxiliary space and guaranteed O(n log n) worst-case speed are required.',
     pseudocode: [
       'procedure heapSort(A)',
       '  n := length(A)',
@@ -173,7 +214,15 @@ export const ALGORITHM_DATA: Record<AlgorithmKey, AlgorithmInfo> = {
     stable: true,
     inPlace: true,
     description:
-      'Linear Search sequentially checks each element of the list from start to finish until a match for the target value is found or the end of the list is reached.',
+      'Linear Search (also known as Sequential Search) is the simplest searching technique. It inspects every element in a list sequentially from index 0 to the end until either a match for the target value is found or all elements have been examined.',
+    howItWorks: [
+      'Start at the first element (index 0) of the array.',
+      'Compare the current element with the target value.',
+      'If current element matches target, return the index immediately (target found!).',
+      'If not matched, move to the next adjacent index on the right.',
+      'Repeat until target is found or array end is reached (returns -1 if missing).',
+    ],
+    whenToUse: 'Best for unsorted datasets, small arrays, or single-time lookups where pre-sorting the array would incur unnecessary O(n log n) overhead.',
     pseudocode: [
       'procedure linearSearch(A, target)',
       '  n := length(A)',
@@ -195,7 +244,16 @@ export const ALGORITHM_DATA: Record<AlgorithmKey, AlgorithmInfo> = {
     stable: true,
     inPlace: true,
     description:
-      'Binary Search works on sorted arrays. It repeatedly divides the search interval in half by comparing the target value to the middle element until the target is found or the interval is empty.',
+      'Binary Search is an exceptionally efficient searching algorithm based on the Divide and Conquer strategy. It requires the array to be sorted beforehand and continuously cuts the search interval in half by comparing the target value against the middle element.',
+    howItWorks: [
+      'Set low pointer to index 0 and high pointer to last index (n - 1).',
+      'Calculate middle index: mid = floor((low + high) / 2).',
+      'If array[mid] equals target, match found! Return index mid.',
+      'If array[mid] < target, target lies in right half: set low = mid + 1.',
+      'If array[mid] > target, target lies in left half: set high = mid - 1.',
+      'Repeat while low <= high. If low exceeds high, target does not exist (returns -1).',
+    ],
+    whenToUse: 'Ideal for large, pre-sorted datasets or database indexing where logarithmic O(log n) search performance is essential.',
     pseudocode: [
       'procedure binarySearch(A, target)',
       '  low := 0, high := length(A) - 1',
