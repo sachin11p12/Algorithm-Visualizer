@@ -28,6 +28,7 @@ import {
   Server,
   Film,
   Building2,
+  Link as LinkIcon,
 } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -333,7 +334,7 @@ export default function PortfolioHomePage() {
             <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground">Featured Projects</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
             {/* Project 1: Algo Visualizer */}
             <div className="group flex flex-col justify-between p-6 rounded-2xl glass-card bg-card/60 border border-border/50 hover:border-primary/50 transition-all duration-300 shadow-md">
@@ -446,6 +447,105 @@ export default function PortfolioHomePage() {
                 <span className="text-xs font-semibold text-muted-foreground">Secure Banking Engine</span>
                 <a
                   href="https://github.com/sachin11p12"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-muted-foreground hover:text-foreground"
+                >
+                  <Github className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+
+            {/* Project 4: URL Shortener Platform */}
+            <div className="group flex flex-col justify-between p-6 rounded-2xl glass-card bg-card/60 border border-border/50 hover:border-primary/50 transition-all duration-300 shadow-md">
+              <div className="space-y-4">
+                <div className="p-3 w-fit rounded-xl bg-blue-500/10 text-blue-500 border border-blue-500/20">
+                  <LinkIcon className="w-6 h-6" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors flex items-center justify-between">
+                    <span>URL Shortener Platform</span>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/15 text-blue-500">Production-Ready</span>
+                  </h3>
+                  <p className="text-xs font-semibold text-muted-foreground">Low-Latency URL Redirect & Analytics Engine</p>
+                </div>
+                
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Built a production-ready URL shortening platform featuring custom aliases, real-time analytics, JWT authentication, and an admin dashboard. Optimized for low-latency redirects with a scalable Spring Boot backend and modern Next.js frontend.
+                </p>
+
+                {/* Feature Micro-Cards Grid */}
+                <div className="grid grid-cols-2 gap-2 pt-1">
+                  <div className="p-2.5 rounded-xl bg-secondary/60 border border-border/40 space-y-0.5">
+                    <p className="text-[11px] font-bold text-foreground flex items-center gap-1">
+                      <span>🔗</span>
+                      <span>URL Shortening</span>
+                    </p>
+                    <p className="text-[10px] text-muted-foreground">Anonymous + Custom Aliases</p>
+                  </div>
+
+                  <div className="p-2.5 rounded-xl bg-secondary/60 border border-border/40 space-y-0.5">
+                    <p className="text-[11px] font-bold text-foreground flex items-center gap-1">
+                      <span>📊</span>
+                      <span>Analytics</span>
+                    </p>
+                    <p className="text-[10px] text-muted-foreground">Real-Time Click Tracking</p>
+                  </div>
+
+                  <div className="p-2.5 rounded-xl bg-secondary/60 border border-border/40 space-y-0.5">
+                    <p className="text-[11px] font-bold text-foreground flex items-center gap-1">
+                      <span>🔐</span>
+                      <span>Authentication</span>
+                    </p>
+                    <p className="text-[10px] text-muted-foreground">JWT + Refresh Tokens</p>
+                  </div>
+
+                  <div className="p-2.5 rounded-xl bg-secondary/60 border border-border/40 space-y-0.5">
+                    <p className="text-[11px] font-bold text-foreground flex items-center gap-1">
+                      <span>👨‍💼</span>
+                      <span>Admin Panel</span>
+                    </p>
+                    <p className="text-[10px] text-muted-foreground">Manage Users & URLs</p>
+                  </div>
+
+                  <div className="p-2.5 rounded-xl bg-secondary/60 border border-border/40 space-y-0.5">
+                    <p className="text-[11px] font-bold text-foreground flex items-center gap-1">
+                      <span>⚡</span>
+                      <span>Performance</span>
+                    </p>
+                    <p className="text-[10px] text-muted-foreground">Sub-15ms Redirects</p>
+                  </div>
+
+                  <div className="p-2.5 rounded-xl bg-secondary/60 border border-border/40 space-y-0.5">
+                    <p className="text-[11px] font-bold text-foreground flex items-center gap-1">
+                      <span>🎨</span>
+                      <span>UI Design</span>
+                    </p>
+                    <p className="text-[10px] text-muted-foreground">Neo-Brutalist Light/Dark</p>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-1.5 pt-2">
+                  {['Next.js 15', 'React 19', 'TypeScript', 'Tailwind v4', 'Spring Boot 3.3', 'Java 21', 'JWT', 'PostgreSQL', 'Zustand'].map((tag) => (
+                    <span key={tag} className="text-[10px] font-semibold px-2 py-0.5 rounded bg-secondary text-secondary-foreground border border-border/40">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="pt-6 mt-4 border-t border-border/40 flex items-center justify-between">
+                <a
+                  href="https://github.com/sachin11p12/URL-Shortner"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-1.5 text-xs font-bold text-primary hover:underline"
+                >
+                  <span>View Repository</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+                <a
+                  href="https://github.com/sachin11p12/URL-Shortner"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs text-muted-foreground hover:text-foreground"
