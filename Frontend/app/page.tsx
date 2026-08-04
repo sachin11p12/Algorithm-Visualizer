@@ -465,7 +465,7 @@ export default function PortfolioHomePage() {
                 <div className="space-y-1">
                   <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors flex items-center justify-between">
                     <span>URL Shortener Platform</span>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/15 text-blue-500">Production-Ready</span>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/15 text-blue-500">INTERACTIVE</span>
                   </h3>
                   <p className="text-xs font-semibold text-muted-foreground">Low-Latency URL Redirect & Analytics Engine</p>
                 </div>
