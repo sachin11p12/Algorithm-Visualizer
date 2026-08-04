@@ -12,6 +12,7 @@ export const ContactForm: React.FC = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submissionDate, setSubmissionDate] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -24,6 +25,28 @@ export const ContactForm: React.FC = () => {
 
     setIsSubmitting(true);
 
+    const currentDateStr = new Date().toLocaleString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+    });
+    setSubmissionDate(currentDateStr);
+
+    const formattedPayload = `
+New Portfolio Inquiry
+
+Name: ${formData.name}
+Email: ${formData.email}
+
+Message:
+${formData.message}
+
+Submitted: ${currentDateStr}
+`.trim();
+
     try {
       // Send form submission directly to sachin11p12@gmail.com via FormSubmit API
       const response = await fetch('https://formsubmit.co/ajax/sachin11p12@gmail.com', {
@@ -35,8 +58,8 @@ export const ContactForm: React.FC = () => {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          message: formData.message,
-          _subject: `New Portfolio Message from ${formData.name}`,
+          message: formattedPayload,
+          _subject: `New Portfolio Inquiry - ${formData.name}`,
           _captcha: 'false',
         }),
       });
@@ -124,21 +147,52 @@ export const ContactForm: React.FC = () => {
             </div>
 
             {submitted ? (
-              <div className="p-8 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center space-y-4">
-                <CheckCircle2 className="w-10 h-10 text-emerald-500 mx-auto" />
-                <div className="space-y-1">
-                  <h4 className="text-lg font-extrabold text-foreground">Message Sent Successfully!</h4>
-                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-md mx-auto">
-                    Thank you, <strong className="text-foreground">{formData.name}</strong>. Your message has been sent directly to <strong className="text-foreground">sachin11p12@gmail.com</strong>. I will get back to you shortly.
-                  </p>
+              <div className="p-6 sm:p-8 rounded-2xl bg-card/90 border border-emerald-500/40 text-left space-y-5 shadow-lg">
+                <div className="flex items-center space-x-3 border-b border-border/40 pb-4">
+                  <div className="p-2 rounded-xl bg-emerald-500/15 text-emerald-500">
+                    <CheckCircle2 className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h4 className="text-base font-extrabold text-foreground">Message Delivered to Inbox</h4>
+                    <p className="text-xs text-muted-foreground">Sent directly to sachin11p12@gmail.com</p>
+                  </div>
                 </div>
+
+                {/* Professional Clean Message Preview Box */}
+                <div className="font-sans text-xs sm:text-sm bg-muted/40 p-6 rounded-xl border border-border/60 space-y-4 text-foreground/90 select-text">
+                  <h5 className="font-extrabold text-foreground text-sm border-b border-border/40 pb-2">
+                    New Portfolio Inquiry
+                  </h5>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider">Name</p>
+                      <p className="font-semibold text-foreground">{formData.name}</p>
+                    </div>
+                    <div>
+                      <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider">Email</p>
+                      <p className="font-semibold text-foreground">{formData.email}</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-1 pt-2 border-t border-border/30">
+                    <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider">Message</p>
+                    <p className="text-foreground/90 font-medium leading-relaxed whitespace-pre-wrap">{formData.message}</p>
+                  </div>
+
+                  <div className="pt-3 border-t border-border/30 flex items-center justify-between text-xs text-muted-foreground">
+                    <span className="font-semibold">Submitted:</span>
+                    <span className="font-mono text-foreground font-semibold">{submissionDate}</span>
+                  </div>
+                </div>
+
                 <button
                   type="button"
                   onClick={() => {
                     setSubmitted(false);
                     setFormData({ name: '', email: '', message: '' });
                   }}
-                  className="px-4 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-bold shadow-md hover:bg-primary/90 transition-all"
+                  className="w-full py-3 px-4 rounded-xl bg-primary text-primary-foreground font-bold text-xs shadow-md hover:bg-primary/90 transition-all text-center"
                 >
                   Send Another Message
                 </button>
