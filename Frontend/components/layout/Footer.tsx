@@ -12,6 +12,7 @@ import {
   Sparkles,
   Info,
   HelpCircle,
+  Brain,
 } from 'lucide-react';
 
 import { VisitorCounter } from '@/components/layout/VisitorCounter';
@@ -31,12 +32,6 @@ export const Footer: React.FC = () => {
     { label: 'Algo Visualizer', href: '/algo', icon: Sparkles },
     { label: 'About', href: '#', icon: Info },
     { label: 'FAQs', href: '#', icon: HelpCircle },
-  ];
-
-  const legalLinks = [
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-    { label: 'Cookies', href: '#' },
   ];
 
   return (
@@ -104,25 +99,17 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* ── Column 3: Legal + Connect stacked ── */}
+          {/* ── Column 3: Currently Learning + Connect stacked ── */}
           <div className="space-y-8 sm:space-y-10">
-            {/* Legal */}
-            <div className="space-y-5 sm:space-y-6">
-              <h4 className="text-xs font-bold uppercase tracking-widest text-foreground">
-                Legal
-              </h4>
-              <ul className="space-y-3 sm:space-y-4">
-                {legalLinks.map((item) => (
-                  <li key={item.label}>
-                    <a
-                      href={item.href}
-                      className="text-sm sm:text-[15px] text-muted-foreground hover:text-foreground transition-colors duration-150"
-                    >
-                      {item.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+            {/* Currently Learning */}
+            <div className="space-y-3">
+              <div className="flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-primary">
+                <Brain className="w-4 h-4" />
+                <span>Currently Learning</span>
+              </div>
+              <p className="text-sm font-semibold text-foreground/90 leading-relaxed">
+                AI Agents • SpringBoot • System Design
+              </p>
             </div>
 
             {/* Connect */}
