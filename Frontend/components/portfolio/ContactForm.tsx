@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, User, MessageSquare, Send, CheckCircle2, Sparkles, Loader2 } from 'lucide-react';
+import { Mail, Phone, MapPin, User, MessageSquare, Send, Sparkles, Loader2 } from 'lucide-react';
 
 export const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -12,7 +12,6 @@ export const ContactForm: React.FC = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [submissionDate, setSubmissionDate] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -33,7 +32,6 @@ export const ContactForm: React.FC = () => {
       minute: '2-digit',
       hour12: true,
     });
-    setSubmissionDate(currentDateStr);
 
     const formattedPayload = `
 New Portfolio Inquiry
@@ -147,55 +145,33 @@ Submitted: ${currentDateStr}
             </div>
 
             {submitted ? (
-              <div className="p-6 sm:p-8 rounded-2xl bg-card/90 border border-emerald-500/40 text-left space-y-5 shadow-lg">
-                <div className="flex items-center space-x-3 border-b border-border/40 pb-4">
-                  <div className="p-2 rounded-xl bg-emerald-500/15 text-emerald-500">
-                    <CheckCircle2 className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h4 className="text-base font-extrabold text-foreground">Message Delivered to Inbox</h4>
-                    <p className="text-xs text-muted-foreground">Sent directly to sachin11p12@gmail.com</p>
-                  </div>
+              <div className="p-8 sm:p-10 rounded-2xl bg-card/90 border border-emerald-500/30 text-center space-y-6 shadow-xl animate-in fade-in zoom-in-95 duration-200">
+                <div className="text-4xl sm:text-5xl select-none">🎉</div>
+                
+                <div className="space-y-2">
+                  <h4 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
+                    Thank you!
+                  </h4>
+                  <p className="text-sm font-semibold text-muted-foreground">
+                    Your message has been received.
+                  </p>
+                  <p className="text-xs sm:text-sm text-foreground/80 font-medium pt-1">
+                    I&apos;ll respond as soon as possible.
+                  </p>
                 </div>
 
-                {/* Professional Clean Message Preview Box */}
-                <div className="font-sans text-xs sm:text-sm bg-muted/40 p-6 rounded-xl border border-border/60 space-y-4 text-foreground/90 select-text">
-                  <h5 className="font-extrabold text-foreground text-sm border-b border-border/40 pb-2">
-                    New Portfolio Inquiry
-                  </h5>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider">Name</p>
-                      <p className="font-semibold text-foreground">{formData.name}</p>
-                    </div>
-                    <div>
-                      <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider">Email</p>
-                      <p className="font-semibold text-foreground">{formData.email}</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-1 pt-2 border-t border-border/30">
-                    <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider">Message</p>
-                    <p className="text-foreground/90 font-medium leading-relaxed whitespace-pre-wrap">{formData.message}</p>
-                  </div>
-
-                  <div className="pt-3 border-t border-border/30 flex items-center justify-between text-xs text-muted-foreground">
-                    <span className="font-semibold">Submitted:</span>
-                    <span className="font-mono text-foreground font-semibold">{submissionDate}</span>
-                  </div>
+                <div className="pt-4 border-t border-border/40">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSubmitted(false);
+                      setFormData({ name: '', email: '', message: '' });
+                    }}
+                    className="px-6 py-2.5 rounded-xl bg-secondary hover:bg-secondary/80 border border-border/50 text-foreground font-semibold text-xs transition-all shadow-sm"
+                  >
+                    Send Another Message
+                  </button>
                 </div>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSubmitted(false);
-                    setFormData({ name: '', email: '', message: '' });
-                  }}
-                  className="w-full py-3 px-4 rounded-xl bg-primary text-primary-foreground font-bold text-xs shadow-md hover:bg-primary/90 transition-all text-center"
-                >
-                  Send Another Message
-                </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
