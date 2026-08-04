@@ -464,69 +464,16 @@ export default function PortfolioHomePage() {
                 </div>
                 <div className="space-y-1">
                   <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors flex items-center justify-between">
-                    <span>URL Shortener Platform</span>
+                    <span>URL Shortener</span>
                     <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/15 text-blue-500">INTERACTIVE</span>
                   </h3>
-                  <p className="text-xs font-semibold text-muted-foreground">Low-Latency URL Redirect & Analytics Engine</p>
+                  <p className="text-xs font-semibold text-muted-foreground">Low-Latency Redirect & Analytics Engine</p>
                 </div>
-                
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Built a production-ready URL shortening platform featuring custom aliases, real-time analytics, JWT authentication, and an admin dashboard. Optimized for low-latency redirects with a scalable Spring Boot backend and modern Next.js frontend.
+                  Production-ready URL shortening platform featuring custom aliases, real-time click analytics, secure JWT authentication with refresh tokens, and an admin management dashboard. Built with sub-15ms response caching, Spring Boot 3.3 backend, and Neo-Brutalist Next.js UI.
                 </p>
-
-                {/* Feature Micro-Cards Grid */}
-                <div className="grid grid-cols-2 gap-2 pt-1">
-                  <div className="p-2.5 rounded-xl bg-secondary/60 border border-border/40 space-y-0.5">
-                    <p className="text-[11px] font-bold text-foreground flex items-center gap-1">
-                      <span>🔗</span>
-                      <span>URL Shortening</span>
-                    </p>
-                    <p className="text-[10px] text-muted-foreground">Anonymous + Custom Aliases</p>
-                  </div>
-
-                  <div className="p-2.5 rounded-xl bg-secondary/60 border border-border/40 space-y-0.5">
-                    <p className="text-[11px] font-bold text-foreground flex items-center gap-1">
-                      <span>📊</span>
-                      <span>Analytics</span>
-                    </p>
-                    <p className="text-[10px] text-muted-foreground">Real-Time Click Tracking</p>
-                  </div>
-
-                  <div className="p-2.5 rounded-xl bg-secondary/60 border border-border/40 space-y-0.5">
-                    <p className="text-[11px] font-bold text-foreground flex items-center gap-1">
-                      <span>🔐</span>
-                      <span>Authentication</span>
-                    </p>
-                    <p className="text-[10px] text-muted-foreground">JWT + Refresh Tokens</p>
-                  </div>
-
-                  <div className="p-2.5 rounded-xl bg-secondary/60 border border-border/40 space-y-0.5">
-                    <p className="text-[11px] font-bold text-foreground flex items-center gap-1">
-                      <span>👨‍💼</span>
-                      <span>Admin Panel</span>
-                    </p>
-                    <p className="text-[10px] text-muted-foreground">Manage Users & URLs</p>
-                  </div>
-
-                  <div className="p-2.5 rounded-xl bg-secondary/60 border border-border/40 space-y-0.5">
-                    <p className="text-[11px] font-bold text-foreground flex items-center gap-1">
-                      <span>⚡</span>
-                      <span>Performance</span>
-                    </p>
-                    <p className="text-[10px] text-muted-foreground">Sub-15ms Redirects</p>
-                  </div>
-
-                  <div className="p-2.5 rounded-xl bg-secondary/60 border border-border/40 space-y-0.5">
-                    <p className="text-[11px] font-bold text-foreground flex items-center gap-1">
-                      <span>🎨</span>
-                      <span>UI Design</span>
-                    </p>
-                    <p className="text-[10px] text-muted-foreground">Neo-Brutalist Light/Dark</p>
-                  </div>
-                </div>
-
                 <div className="flex flex-wrap gap-1.5 pt-2">
-                  {['Next.js 15', 'React 19', 'TypeScript', 'Tailwind v4', 'Spring Boot 3.3', 'Java 21', 'JWT', 'PostgreSQL', 'Zustand'].map((tag) => (
+                  {['Next.js 15', 'React 19', 'Spring Boot 3.3', 'Java 21', 'PostgreSQL', 'JWT', 'Tailwind'].map((tag) => (
                     <span key={tag} className="text-[10px] font-semibold px-2 py-0.5 rounded bg-secondary text-secondary-foreground border border-border/40">
                       {tag}
                     </span>
