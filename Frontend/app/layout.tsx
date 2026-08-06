@@ -15,7 +15,7 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Sachin Tiwari | Full Stack Engineer',
+  title: 'Sachin Tiwari | Full Stack Engineer', 
   description:
     'A modern, responsive algorithm visualizer built with Next.js 15, React 19, TypeScript, Zustand, and Framer Motion by Sachin Tiwari.',
   keywords: [
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     'React',
     'TypeScript',
     'Data Structures',
-    'Sachin Tiwari',
+    'Sachin  Tiwari',
   ],
   authors: [{ name: 'Sachin Tiwari', url: 'https://github.com/sachin11p12' }],
   openGraph: {
