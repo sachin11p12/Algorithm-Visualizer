@@ -15,7 +15,7 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'AlgoVisualizer | Interactive Sorting & Searching Visualizer',
+  title: 'Sachin Tiwari | Full Stack Engineer',
   description:
     'A modern, responsive algorithm visualizer built with Next.js 15, React 19, TypeScript, Zustand, and Framer Motion by Sachin Tiwari.',
   keywords: [
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Sachin Tiwari', url: 'https://github.com/sachin11p12' }],
   openGraph: {
-    title: 'AlgoVisualizer | Interactive Sorting & Searching Visualizer',
+    title: 'Sachin Tiwari | Full Stack Engineer',
     description:
       'Master Algorithms Faster with Step-by-Step Visual Execution and Real-Time Insights.',
     type: 'website',
