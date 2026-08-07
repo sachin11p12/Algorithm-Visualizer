@@ -4,6 +4,8 @@ An interactive, high-performance Data Structures and Algorithms (DSA) visualizer
 
 Designed and developed by **[Sachin Tiwari](https://github.com/sachin11p12)** to provide step-by-step visual execution, real-time metrics, line-by-line pseudocode playback, and intuitive algorithm theory explanations.
 
+🌐 **Live Preview / Portfolio**: [https://sachin-online.vercel.app/](https://sachin-online.vercel.app/)
+
 ---
 
 ## 🌟 Key Features
@@ -96,6 +98,7 @@ Algo-Visualizer/
 ## 👨‍💻 Author
 
 **Sachin Tiwari**
+- **Portfolio**: [https://sachin-online.vercel.app/](https://sachin-online.vercel.app/)
 - **Email**: [sachin11p12@gmail.com](mailto:sachin11p12@gmail.com)
 - **GitHub**: [@sachin11p12](https://github.com/sachin11p12)
 - **LinkedIn**: [sachin-tiwari-18s21](https://linkedin.com/in/sachin-tiwari-18s21)
