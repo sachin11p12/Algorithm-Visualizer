@@ -370,7 +370,7 @@ export default function PortfolioHomePage() {
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
                 <a
-                  href="https://github.com/sachin11p12"
+                  href="https://github.com/sachin11p12/Algorithm-Visualizer"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs text-muted-foreground hover:text-foreground"
