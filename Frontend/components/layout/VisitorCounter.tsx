@@ -1,19 +1,21 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Users } from 'lucide-react';
 
 export const VisitorCounter: React.FC = () => {
   const [visitorCount, setVisitorCount] = useState<number | null>(null);
   const [mounted, setMounted] = useState(false);
+  const hasFetchedRef = useRef(false);
 
   useEffect(() => {
     setMounted(true);
 
+    if (hasFetchedRef.current) return;
+    hasFetchedRef.current = true;
+
     async function updateVisitorCount() {
       const STORAGE_KEY = 'real_portfolio_visitor_count';
-      const HAS_VISITED_KEY = 'real_portfolio_has_visited';
-
       let currentCount = 1;
 
       try {
@@ -22,27 +24,25 @@ export const VisitorCounter: React.FC = () => {
           currentCount = parseInt(stored, 10);
         }
 
-        const hasVisited = sessionStorage.getItem(HAS_VISITED_KEY);
-        const action = !hasVisited ? 'up' : 'current';
-
-        // Real Global Counter API for sachin11p12 portfolio
-        const apiRes = await fetch(`https://api.counterapi.dev/v1/sachin11p12-portfolio/visits/${action}`);
+        // Always increment global count on every page view
+        const apiRes = await fetch('https://api.counterapi.dev/v1/sachin11p12-portfolio/visits/up', {
+          cache: 'no-store',
+        });
 
         if (apiRes.ok) {
           const data = await apiRes.json();
           if (data && typeof data.count === 'number') {
             currentCount = data.count;
+            localStorage.setItem(STORAGE_KEY, currentCount.toString());
           }
-        } else if (!hasVisited) {
+        } else {
           currentCount += 1;
-        }
-
-        if (!hasVisited) {
-          sessionStorage.setItem(HAS_VISITED_KEY, 'true');
           localStorage.setItem(STORAGE_KEY, currentCount.toString());
         }
       } catch (e) {
-        // Fallback to local storage if API unreachable
+        // Fallback to local storage increment if API is unreachable/blocked
+        currentCount += 1;
+        localStorage.setItem(STORAGE_KEY, currentCount.toString());
       }
 
       setVisitorCount(currentCount);
@@ -60,10 +60,11 @@ export const VisitorCounter: React.FC = () => {
         <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
       </span>
       <Users className="w-3.5 h-3.5 text-primary" />
-      <span className="text-muted-foreground">Total Visitors:</span>
+      <span className="text-muted-foreground">Total Views:</span>
       <span className="text-foreground font-mono font-bold">
         {visitorCount !== null ? visitorCount.toLocaleString() : '...'}
       </span>
     </div>
   );
 };
+
