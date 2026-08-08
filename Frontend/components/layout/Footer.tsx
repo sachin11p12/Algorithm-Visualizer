@@ -50,8 +50,8 @@ export const Footer: React.FC = () => {
             {/* Logo */}
             <div className="flex items-center">
               <span className="font-black text-2xl sm:text-3xl tracking-tight">
-                <span className="text-foreground">Algo</span>
-                <span className="text-primary">Visualizer</span>
+                <span className="text-foreground">Sachin</span>
+                <span className="text-primary"> Tiwari</span>
               </span>
             </div>
 
@@ -151,7 +151,7 @@ export const Footer: React.FC = () => {
       <div className="border-t border-border/40">
         <div className="max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12 py-4 sm:py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
           <span className="text-xs text-muted-foreground">
-            © {year} AlgoVisualizer. All rights reserved.
+            © {year} Sachin Tiwari. All rights reserved.
           </span>
           <div className="flex items-center space-x-4 text-xs text-muted-foreground">
             <VisitorCounter />
