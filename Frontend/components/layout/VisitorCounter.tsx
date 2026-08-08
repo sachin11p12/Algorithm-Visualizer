@@ -16,34 +16,67 @@ export const VisitorCounter: React.FC = () => {
 
     async function updateVisitorCount() {
       const STORAGE_KEY = 'real_portfolio_visitor_count';
-      let currentCount = 1;
+      let currentCount: number | null = null;
 
+      // Read local storage baseline if available
       try {
         const stored = localStorage.getItem(STORAGE_KEY);
         if (stored) {
-          currentCount = parseInt(stored, 10);
+          const parsed = parseInt(stored, 10);
+          if (!isNaN(parsed)) currentCount = parsed;
         }
+      } catch (e) {
+        // LocalStorage access restricted
+      }
 
-        // Always increment global count on every page view
-        const apiRes = await fetch('https://api.counterapi.dev/v1/sachin11p12-portfolio/visits/up', {
-          cache: 'no-store',
-        });
+      // Try Primary Counter API (using timestamp query param to avoid CORS header preflight issues across Safari/Edge/Firefox)
+      try {
+        const timestamp = Date.now();
+        const apiRes = await fetch(`https://api.counterapi.dev/v1/sachin11p12-portfolio/visits/up?t=${timestamp}`);
 
         if (apiRes.ok) {
           const data = await apiRes.json();
-          if (data && typeof data.count === 'number') {
+          if (data && typeof data.count === 'number' && data.count > 0) {
             currentCount = data.count;
-            localStorage.setItem(STORAGE_KEY, currentCount.toString());
+            try {
+              localStorage.setItem(STORAGE_KEY, currentCount.toString());
+            } catch (e) {}
+            setVisitorCount(currentCount);
+            return;
           }
-        } else {
-          currentCount += 1;
-          localStorage.setItem(STORAGE_KEY, currentCount.toString());
         }
       } catch (e) {
-        // Fallback to local storage increment if API is unreachable/blocked
-        currentCount += 1;
-        localStorage.setItem(STORAGE_KEY, currentCount.toString());
+        console.warn('CounterAPI unreachable or blocked by browser ad-blocker:', e);
       }
+
+      // Backup read if fetch /up failed
+      try {
+        const backupRes = await fetch(`https://api.counterapi.dev/v1/sachin11p12-portfolio/visits/current?t=${Date.now()}`);
+        if (backupRes.ok) {
+          const data = await backupRes.json();
+          if (data && typeof data.count === 'number' && data.count > 0) {
+            currentCount = data.count;
+            try {
+              localStorage.setItem(STORAGE_KEY, currentCount.toString());
+            } catch (e) {}
+            setVisitorCount(currentCount);
+            return;
+          }
+        }
+      } catch (e) {
+        // Backup fetch blocked
+      }
+
+      // Fallback if network or adblocker completely blocked API calls
+      if (currentCount !== null) {
+        currentCount += 1;
+      } else {
+        currentCount = 1;
+      }
+
+      try {
+        localStorage.setItem(STORAGE_KEY, currentCount.toString());
+      } catch (e) {}
 
       setVisitorCount(currentCount);
     }
@@ -67,4 +100,5 @@ export const VisitorCounter: React.FC = () => {
     </div>
   );
 };
+
 
