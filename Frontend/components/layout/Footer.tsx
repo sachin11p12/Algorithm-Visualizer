@@ -14,8 +14,6 @@ import {
   HelpCircle,
 } from 'lucide-react';
 
-import { VisitorCounter } from '@/components/layout/VisitorCounter';
-
 export const Footer: React.FC = () => {
   const year = new Date().getFullYear();
 
@@ -154,7 +152,6 @@ export const Footer: React.FC = () => {
             © {year} Sachin Tiwari. All rights reserved.
           </span>
           <div className="flex items-center space-x-4 text-xs text-muted-foreground">
-            <VisitorCounter />
             <a
               href="#contact"
               onClick={(e) => {

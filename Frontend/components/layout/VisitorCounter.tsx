@@ -39,7 +39,9 @@ export const VisitorCounter: React.FC = () => {
           if (data && typeof data.count === 'number' && data.count > 0) {
             currentCount = data.count;
             try {
-              localStorage.setItem(STORAGE_KEY, currentCount.toString());
+              if (currentCount !== null) {
+                localStorage.setItem(STORAGE_KEY, currentCount.toString());
+              }
             } catch (e) {}
             setVisitorCount(currentCount);
             return;
@@ -57,7 +59,9 @@ export const VisitorCounter: React.FC = () => {
           if (data && typeof data.count === 'number' && data.count > 0) {
             currentCount = data.count;
             try {
-              localStorage.setItem(STORAGE_KEY, currentCount.toString());
+              if (currentCount !== null) {
+                localStorage.setItem(STORAGE_KEY, currentCount.toString());
+              }
             } catch (e) {}
             setVisitorCount(currentCount);
             return;
@@ -75,7 +79,9 @@ export const VisitorCounter: React.FC = () => {
       }
 
       try {
-        localStorage.setItem(STORAGE_KEY, currentCount.toString());
+        if (currentCount !== null) {
+          localStorage.setItem(STORAGE_KEY, currentCount.toString());
+        }
       } catch (e) {}
 
       setVisitorCount(currentCount);
@@ -84,21 +90,7 @@ export const VisitorCounter: React.FC = () => {
     updateVisitorCount();
   }, []);
 
-  if (!mounted) return null;
-
-  return (
-    <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-secondary/80 border border-border/50 text-xs font-semibold shadow-sm select-none">
-      <span className="relative flex h-2 w-2">
-        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-      </span>
-      <Users className="w-3.5 h-3.5 text-primary" />
-      <span className="text-muted-foreground">Total Views:</span>
-      <span className="text-foreground font-mono font-bold">
-        {visitorCount !== null ? visitorCount.toLocaleString() : '...'}
-      </span>
-    </div>
-  );
+  return null;
 };
 
 

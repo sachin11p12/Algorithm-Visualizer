@@ -296,7 +296,7 @@ export default function PortfolioHomePage() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border/40 pb-4">
                 <div>
                   <h3 className="text-xl font-bold text-foreground">Full Stack Developer</h3>
-                  <p className="text-sm font-semibold text-primary">masterstroke media digiinnovators pvt ltd</p>
+                  <p className="text-sm font-semibold text-primary">Masterstroke Media Digiinnovators Pvt Ltd</p>
                 </div>
                 <div className="flex items-center space-x-2 text-xs font-semibold px-3 py-1.5 rounded-xl bg-primary/10 text-primary border border-primary/20 w-fit">
                   <span>07/2025 – Present</span>

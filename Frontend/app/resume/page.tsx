@@ -101,7 +101,7 @@ export default function ResumePage() {
               <span className="text-xs font-bold text-slate-900">Full Stack Developer</span>
               <span className="text-[11px] font-semibold text-slate-700">07/2025 – Present | Noida</span>
             </div>
-            <p className="text-xs font-semibold text-slate-800 italic">masterstroke media digiinnovators pvt ltd</p>
+            <p className="text-xs font-semibold text-slate-800 italic">Masterstroke Media Digiinnovators Pvt Ltd</p>
             <ul className="list-disc list-inside text-xs text-slate-800 space-y-1.5 pl-1">
               <li>Developed responsive and reusable user interfaces using React.js, Next.js, TypeScript, and Tailwind CSS.</li>
               <li>Designed and integrated RESTful APIs using Java Spring Boot to deliver end-to-end application features.</li>
