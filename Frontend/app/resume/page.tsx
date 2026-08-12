@@ -41,7 +41,7 @@ export default function ResumePage() {
           <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-700 font-medium">
             <span className="flex items-center gap-1.5"><Mail className="w-3.5 h-3.5" /> sachin11p12@gmail.com</span>
             <span>•</span>
-            <span className="flex items-center gap-1.5"><Phone className="w-3.5 h-3.5" /> 6386430534</span>
+            <span className="flex items-center gap-1.5"><Phone className="w-3.5 h-3.5" /> 638XXXXXXX</span>
             <span>•</span>
             <span className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5" /> Noida, Uttar Pradesh</span>
           </div>

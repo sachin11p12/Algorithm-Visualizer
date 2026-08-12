@@ -115,7 +115,7 @@ Submitted: ${currentDateStr}
                 </div>
                 <div>
                   <p className="text-[11px] font-bold text-muted-foreground uppercase">Phone Number</p>
-                  <p className="font-semibold text-foreground">+91 6386430534</p>
+                  <p className="font-semibold text-foreground">+91 638XXXXXXX</p>
                 </div>
               </div>
 

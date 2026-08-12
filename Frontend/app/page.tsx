@@ -159,11 +159,11 @@ export default function PortfolioHomePage() {
                 <span>sachin11p12@gmail.com</span>
               </a>
               <a
-                href="tel:6386430534"
+                href="tel:638XXXXXXX"
                 className="flex items-center space-x-2 hover:text-primary transition-colors"
               >
                 <Phone className="w-4 h-4 text-primary" />
-                <span>+91 6386430534</span>
+                <span>+91 638XXXXXXX</span>
               </a>
               <a
                 href="https://github.com/sachin11p12"
