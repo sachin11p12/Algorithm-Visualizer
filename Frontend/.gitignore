@@ -3,24 +3,46 @@
 /.pnp
 .pnp.js
 
-# testing
+# testing & generated test artifacts
 /coverage
+/.nyc_output
+*.lcov
+.vitest/
+.vitest-cache/
+.jest/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+cypress/videos/
+cypress/screenshots/
+*.failed.*
+bubbleSort.test.ts
+binarySearch.test.ts
+*.test.ts
 
-# next.js
+
+# next.js & build output
 /.next/
 /out/
-
-# production
 /build
 
-# misc
-.DS_Store
-*.pem
+# temporary & backup files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+.tmp/
+temp/
+powershell.bat
 
-# debug
+# debug logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+*.log
 
 # local env files
 .env*.local
@@ -28,6 +50,16 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# system & IDE
+.DS_Store
+Thumbs.db
+*.pem
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
 
 # typescript
 *.tsbuildinfo

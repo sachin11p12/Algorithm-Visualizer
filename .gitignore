@@ -2,18 +2,50 @@
 node_modules/
 Frontend/node_modules/
 
-# next.js
+# testing & test artifacts
+coverage/
+.nyc_output/
+*.lcov
+.vitest/
+.vitest-cache/
+.jest/
+test-results/
+playwright-report/
+blob-report/
+cypress/videos/
+cypress/screenshots/
+bubbleSort.test.ts
+binarySearch.test.ts
+*.test.ts
+
+
+# next.js & build output
 .next/
 Frontend/.next/
-
-# production
 build/
 Frontend/out/
 
-# misc
-.DS_Store
-*.pem
+# temporary & backup files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+.tmp/
+temp/
+powershell.bat
+
+# logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# system & IDE
+.DS_Store
+Thumbs.db
+*.pem
+.idea/
 
 # env files
 .env*
