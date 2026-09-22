@@ -38,6 +38,7 @@ export const Header: React.FC<HeaderProps> = () => {
     { label: 'Experience', href: '#experience' },
     { label: 'Algo Visualizer', href: '/algo', isFeatured: true },
     { label: 'Contact', href: '#contact' },
+    { label: 'Blog', href: '/blog' },
   ];
 
   // Smooth scroll handler preventing #hash from appearing in URL bar
@@ -75,7 +76,11 @@ export const Header: React.FC<HeaderProps> = () => {
             const isActive =
               item.href === '/'
                 ? pathname === '/'
-                : pathname.startsWith('/algo') || pathname.startsWith('/sorting') || pathname.startsWith('/searching');
+                : item.href === '/blog'
+                ? pathname.startsWith('/blog')
+                : item.href === '/algo'
+                ? pathname.startsWith('/algo') || pathname.startsWith('/sorting') || pathname.startsWith('/searching')
+                : false;
 
             if (item.isFeatured) {
               return (
@@ -91,6 +96,23 @@ export const Header: React.FC<HeaderProps> = () => {
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>{item.label}</span>
+                </Link>
+              );
+            }
+
+            if (item.href.startsWith('/')) {
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={cn(
+                    'px-3 py-1.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer',
+                    isActive
+                      ? 'text-primary font-bold bg-primary/10'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-secondary/60'
+                  )}
+                >
+                  {item.label}
                 </Link>
               );
             }
@@ -173,23 +195,42 @@ export const Header: React.FC<HeaderProps> = () => {
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-border/40 mt-3 pt-3 pb-4 px-4 space-y-2 bg-card/95 backdrop-blur-md">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              onClick={(e) => {
-                setMobileMenuOpen(false);
-                handleNavClick(e, item.href);
-              }}
-              className={cn(
-                'flex items-center space-x-2 px-3 py-2 rounded-xl text-sm font-semibold transition-colors cursor-pointer',
-                item.isFeatured ? 'bg-primary/10 text-primary border border-primary/20' : 'text-foreground hover:bg-secondary'
-              )}
-            >
-              {item.isFeatured && <Sparkles className="w-4 h-4" />}
-              <span>{item.label}</span>
-            </a>
-          ))}
+          {navItems.map((item) => {
+            if (item.href.startsWith('/')) {
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={cn(
+                    'flex items-center space-x-2 px-3 py-2 rounded-xl text-sm font-semibold transition-colors cursor-pointer',
+                    item.isFeatured ? 'bg-primary/10 text-primary border border-primary/20' : 'text-foreground hover:bg-secondary'
+                  )}
+                >
+                  {item.isFeatured && <Sparkles className="w-4 h-4" />}
+                  <span>{item.label}</span>
+                </Link>
+              );
+            }
+
+            return (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={(e) => {
+                  setMobileMenuOpen(false);
+                  handleNavClick(e, item.href);
+                }}
+                className={cn(
+                  'flex items-center space-x-2 px-3 py-2 rounded-xl text-sm font-semibold transition-colors cursor-pointer',
+                  item.isFeatured ? 'bg-primary/10 text-primary border border-primary/20' : 'text-foreground hover:bg-secondary'
+                )}
+              >
+                {item.isFeatured && <Sparkles className="w-4 h-4" />}
+                <span>{item.label}</span>
+              </a>
+            );
+          })}
 
           <div className="pt-2 flex items-center space-x-2">
             <Link

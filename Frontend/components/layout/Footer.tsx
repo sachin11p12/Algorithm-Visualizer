@@ -12,6 +12,7 @@ import {
   Sparkles,
   Info,
   HelpCircle,
+  BookOpen,
 } from 'lucide-react';
 
 export const Footer: React.FC = () => {
@@ -27,8 +28,9 @@ export const Footer: React.FC = () => {
   const navLinks = [
     { label: 'Home', href: '/', icon: Home },
     { label: 'Algo Visualizer', href: '/algo', icon: Sparkles },
-    { label: 'About', href: '#', icon: Info },
-    { label: 'FAQs', href: '#', icon: HelpCircle },
+    { label: 'Blog', href: '/blog', icon: BookOpen },
+    { label: 'About', href: '/#about', icon: Info },
+    { label: 'Contact', href: '/#contact', icon: HelpCircle },
   ];
 
   const learningItems = [
