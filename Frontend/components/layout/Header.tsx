@@ -38,6 +38,7 @@ export const Header: React.FC<HeaderProps> = () => {
     { label: 'Experience', href: '#experience' },
     { label: 'Algo Visualizer', href: '/algo', isFeatured: true },
     { label: 'Contact', href: '#contact' },
+    { label: 'Blog', href: '#blog' },
   ];
 
   // Smooth scroll handler preventing #hash from appearing in URL bar
