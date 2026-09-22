@@ -64,3 +64,9 @@ Thumbs.db
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# AI assistant / agent instructions
+CLAUDE.md
+AGENTS.md
+GEMINI.md
+.agents/

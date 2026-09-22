@@ -49,3 +49,9 @@ Thumbs.db
 
 # env files
 .env*
+
+# AI assistant / agent instructions
+CLAUDE.md
+AGENTS.md
+GEMINI.md
+.agents/
