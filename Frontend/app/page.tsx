@@ -501,6 +501,8 @@ export default function PortfolioHomePage() {
                   <Github className="w-4 h-4" />
                 </a>
               </div>
+            </div>
+
             {/* Project 5: ISS Live Tracker */}
             <div className="group flex flex-col justify-between p-6 rounded-2xl glass-card bg-card/60 border border-border/50 hover:border-primary/50 transition-all duration-300 shadow-md">
               <div className="space-y-4">

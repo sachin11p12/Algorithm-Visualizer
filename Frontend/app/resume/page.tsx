@@ -146,12 +146,30 @@ export default function ResumePage() {
 
           <div className="space-y-2 pt-2">
             <div className="flex justify-between items-baseline">
-              <span className="text-xs font-bold text-slate-900">Algo Visualizer</span>
-              <span className="text-[11px] font-semibold text-slate-700">Interactive Visual Studio</span>
+              <div>
+                <span className="text-xs font-bold text-slate-900">ISS Live Tracker</span>
+                <a
+                  href="https://iss-tracker-psi.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-2 text-blue-700 hover:underline font-semibold text-[11px]"
+                >
+                  [Live Demo]
+                </a>
+                <a
+                  href="https://github.com/sachin11p12/ISS_tracker"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-2 text-slate-600 hover:underline font-semibold text-[11px]"
+                >
+                  [GitHub]
+                </a>
+              </div>
+              <span className="text-[11px] font-semibold text-slate-700">Real-Time Telemetry</span>
             </div>
             <ul className="list-disc list-inside text-xs text-slate-800 space-y-1 pl-1">
-              <li>Built a modern algorithm visualizer using Next.js 15, React 19, TypeScript, Tailwind CSS, Zustand, and Framer Motion.</li>
-              <li>Engineered 60 FPS animated array bar execution with line-by-line syntax-highlighted pseudocode playback.</li>
+              <li>Engineered a real-time International Space Station tracker in Next.js 15, React 19, TypeScript, and Tailwind CSS.</li>
+              <li>Integrated Leaflet 2D/3D map projections, live orbital velocity & altitude feeds, live space cameras, and astronaut rosters.</li>
             </ul>
           </div>
         </div>
