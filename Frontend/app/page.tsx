@@ -643,14 +643,14 @@ export default function PortfolioHomePage() {
 
         </div>
 
-        {/* ── 6. BLOG & RESEARCH PUBLICATIONS SECTION ── */}
-        <section id="blog" className="space-y-6 scroll-mt-20">
+        {/* ── 6. RESEARCH PUBLICATIONS SECTION ── */}
+        <section className="space-y-6">
           <div className="space-y-2 border-b border-border/40 pb-4">
             <div className="flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-primary">
               <BookOpen className="w-4 h-4" />
-              <span>Articles & Publications</span>
+              <span>Academic Papers</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground">Blog & Research</h2>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground">Research Publications</h2>
           </div>
 
           <div className="p-6 lg:p-8 rounded-2xl glass-card bg-card/60 border border-border/50 space-y-3">
