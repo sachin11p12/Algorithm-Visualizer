@@ -300,7 +300,7 @@ export default function PortfolioHomePage() {
                   <p className="text-sm font-semibold text-primary">Masterstroke Media Digiinnovators Pvt Ltd</p>
                 </div>
                 <div className="flex items-center space-x-2 text-xs font-semibold px-3 py-1.5 rounded-xl bg-primary/10 text-primary border border-primary/20 w-fit">
-                  <span>07/2025 – Present</span>
+                  <span>09/2025 – Present</span>
                   <span>|</span>
                   <span>Noida, UP</span>
                 </div>

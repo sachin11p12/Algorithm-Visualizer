@@ -99,7 +99,7 @@ export default function ResumePage() {
           <div className="space-y-2">
             <div className="flex justify-between items-baseline">
               <span className="text-xs font-bold text-slate-900">Full Stack Developer</span>
-              <span className="text-[11px] font-semibold text-slate-700">07/2025 – Present | Noida</span>
+              <span className="text-[11px] font-semibold text-slate-700">09/2025 – Present | Noida</span>
             </div>
             <p className="text-xs font-semibold text-slate-800 italic">Masterstroke Media Digiinnovators Pvt Ltd</p>
             <ul className="list-disc list-inside text-xs text-slate-800 space-y-1.5 pl-1">
