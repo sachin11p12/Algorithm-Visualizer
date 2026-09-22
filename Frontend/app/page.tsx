@@ -29,6 +29,7 @@ import {
   Film,
   Building2,
   Link as LinkIcon,
+  Globe,
 } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -493,6 +494,50 @@ export default function PortfolioHomePage() {
                 </a>
                 <a
                   href="https://github.com/sachin11p12/URL-Shortner"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-muted-foreground hover:text-foreground"
+                >
+                  <Github className="w-4 h-4" />
+                </a>
+              </div>
+            {/* Project 5: ISS Live Tracker */}
+            <div className="group flex flex-col justify-between p-6 rounded-2xl glass-card bg-card/60 border border-border/50 hover:border-primary/50 transition-all duration-300 shadow-md">
+              <div className="space-y-4">
+                <div className="p-3 w-fit rounded-xl bg-cyan-500/10 text-cyan-500 border border-cyan-500/20">
+                  <Globe className="w-6 h-6" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors flex items-center justify-between">
+                    <span>ISS Live Tracker</span>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-500 uppercase tracking-wide">Live Demo</span>
+                  </h3>
+                  <p className="text-xs font-semibold text-muted-foreground">Real-Time Orbital Telemetry & Satellite Tracker</p>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Real-time space station tracker for NORAD #25544 featuring instantaneous speed & altitude telemetry, interactive Leaflet 2D/3D map projections, live HD Earth video streams, and active astronaut expedition rosters.
+                </p>
+                <div className="flex flex-wrap gap-1.5 pt-2">
+                  {['Next.js 15', 'React 19', 'TypeScript', 'Leaflet', 'REST APIs', 'Tailwind CSS'].map((tag) => (
+                    <span key={tag} className="text-[10px] font-semibold px-2 py-0.5 rounded bg-secondary text-secondary-foreground border border-border/40">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="pt-6 mt-4 border-t border-border/40 flex items-center justify-between">
+                <a
+                  href="https://iss-tracker-psi.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-1.5 text-xs font-bold text-cyan-500 hover:underline"
+                >
+                  <span>Launch Live Tracker</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+                <a
+                  href="https://github.com/sachin11p12/ISS_tracker"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs text-muted-foreground hover:text-foreground"
